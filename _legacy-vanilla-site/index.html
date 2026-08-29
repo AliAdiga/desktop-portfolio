@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>Portfolio — Desktop</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Desktop wallpaper layer -->
+  <div class="desktop" id="desktop">
+
+    <!-- Optional full-bleed photo (set WALLPAPER in js/data.js); hidden until set -->
+    <div class="desktop-photo" id="desktopPhoto" hidden></div>
+
+    <!-- Top nav bar -->
+    <header class="menubar">
+      <div class="menubar-left">
+        <span class="menubar-glyph" aria-hidden="true"></span>
+        <span class="menubar-app-name" id="activeAppName">Portfolio</span>
+      </div>
+      <!-- Populated from js/data.js FOLDERS: real shortcuts to each folder, not decoration -->
+      <nav class="menubar-items" id="menubarItems"></nav>
+      <div class="menubar-right">
+        <span id="menubarClock">—</span>
+      </div>
+    </header>
+
+    <!-- Floating profile card (populated from js/data.js PROFILE) -->
+    <aside class="profile-card" id="profileCard"></aside>
+
+    <!-- Desktop icons render here (populated by js/app.js from js/data.js) -->
+    <main class="icon-field" id="iconField" aria-label="Desktop folders"></main>
+
+    <!-- Windows (Finder-style) render here -->
+    <div class="window-layer" id="windowLayer"></div>
+
+    <!-- Dock (populated by js/app.js from Finder + Mail + SOCIAL_LINKS in js/data.js) -->
+    <footer class="dock" id="dock"></footer>
+  </div>
+
+  <!-- Magazine viewer overlay (immersive, closes via X) -->
+  <div class="magazine-overlay" id="magazineOverlay" hidden>
+    <button class="magazine-close" id="magazineClose" aria-label="Close magazine">&times;</button>
+    <div class="magazine-stage" id="magazineStage"></div>
+    <div class="magazine-nav">
+      <button class="magazine-arrow magazine-arrow-prev" id="magazinePrev" aria-label="Previous page">&#10094;</button>
+      <div class="magazine-dots" id="magazineDots"></div>
+      <button class="magazine-arrow magazine-arrow-next" id="magazineNext" aria-label="Next page">&#10095;</button>
+    </div>
+  </div>
+
+  <!-- Video lightbox -->
+  <div class="lightbox" id="videoLightbox" hidden>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close video">&times;</button>
+    <div class="lightbox-inner">
+      <video id="lightboxVideo" controls playsinline></video>
+      <p class="lightbox-title" id="lightboxTitle"></p>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
