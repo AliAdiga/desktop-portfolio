@@ -62,10 +62,9 @@ export interface AppDefinition {
   faClass?: string;
 }
 
-// Client wants a minimal launch: only the video folder visible on the
-// desktop for now. Everything else stays fully built and wired up —
-// just set `showOnDesktop: true` (or delete the line) on any entry below
-// to bring it back once the client is ready to add more.
+// NOTE: `showOnDesktop` / `showOnDock` no longer drive either surface — the
+// desktop and dock are folders in src/data/folders.ts. These entries still
+// supply each app's label, icon and window size.
 const staticApps: AppDefinition[] = [
   {
     id: "about",
@@ -141,11 +140,10 @@ const staticApps: AppDefinition[] = [
   },
   {
     id: "videos",
-    label: "untitled videos",
+    label: "Demos",
     iconName: "Film",
     iconColor: "text-sky-300",
     mobileColor: "bg-sky-500",
-    // The one icon the client wants visible for launch.
     windowSize: { maxWidth: "max-w-6xl", height: "h-[760px]" },
   },
   {

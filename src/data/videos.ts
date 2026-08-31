@@ -27,22 +27,4 @@ export const videos: VideoItem[] = [
     description:
       "Storefront for a jewellery studio working in recycled gold — collections, product pages, size and gift guides, and a cart.",
   },
-  {
-    id: "demo-cedar-stone",
-    title: "Cedar Stone Legal",
-    src: "/videos/cedar-stone.mp4",
-    poster: "/projects/cedar-stone.jpg",
-    meta: "2026 · Legal · Bilingual",
-    description:
-      "Marketing site for a law firm: practice areas, team profiles, an FAQ and a consultation booking flow.",
-  },
-  {
-    id: "demo-evercare",
-    title: "Evercare",
-    src: "/videos/evercare.mp4",
-    poster: "/projects/evercare.jpg",
-    meta: "2026 · Healthcare",
-    description:
-      "Hospital site covering departments, consultants and facilities, with online booking and a patient portal entry point.",
-  },
 ];

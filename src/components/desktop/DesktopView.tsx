@@ -31,9 +31,8 @@ import { WorkViewer } from "./WorkViewer";
 import { buildWorkItems, type WorkItem } from "@/lib/workItems";
 import { scatterPosition } from "@/lib/scatter";
 
-// Client wants a minimal launch: just the one "untitled videos" folder icon,
-// not each video scattered individually. Flip this back to true once
-// they're ready to add more icons.
+// Scatters every video and photo across the desktop as its own icon. Off:
+// the desktop is driven by the folder tree in src/data/folders.ts instead.
 const SHOW_INDIVIDUAL_WORK_ICONS = false;
 
 /** How far the pointer may travel between press and release before it counts as a drag. */

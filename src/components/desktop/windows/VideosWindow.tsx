@@ -172,7 +172,7 @@ export function VideosWindow({ data }: { data: PortfolioData }) {
     <div className="flex flex-col h-[calc(100%+3rem)] bg-[#161616] -m-6 rounded-b-xl overflow-hidden font-sans relative">
       {/* Toolbar */}
       <div className="bg-[#2d2d2d]/90 backdrop-blur-md px-4 py-2 border-b border-black/20 shrink-0 sticky top-0 z-10 flex items-center justify-between">
-        <h2 className="text-white font-bold text-sm">untitled videos</h2>
+        <h2 className="text-white font-bold text-sm">Demos</h2>
         <span className="text-white/50 text-xs">{videos.length} items</span>
       </div>
 

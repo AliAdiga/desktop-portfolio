@@ -4,9 +4,8 @@ import React from "react";
 
 type IconProps = { size?: number; className?: string; strokeWidth?: number };
 
-// Folder with a play mark inside — the video folder needs to read as "a folder
-// full of clips", not a generic system glyph, since it's the one icon the
-// client wants visible right now.
+// Folder with a play mark inside — reads as "a folder of clips" rather than a
+// generic system glyph, which is what the Demos app needs.
 //
 // Drawn as a single path set (rather than composing a Lucide Folder with an
 // overlapping badge) so it stays pure line art at any stroke weight: an
