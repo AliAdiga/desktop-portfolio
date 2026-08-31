@@ -5,17 +5,20 @@ import HTMLFlipBook from "react-pageflip";
 import { PortfolioData, Profile, VideoItem } from "@/types/portfolio";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-// RIGHT page of a spread: the video itself, filling the page edge-to-edge.
-// The actual paper-curl flip (bend, shadow, highlight sweep) is handled by
+// RIGHT page of a spread: the demo clip itself.
+//
+// Fitted with object-contain, never object-cover. Demos are screen recordings
+// of real sites at whatever shape the site was recorded at, so cropping one to
+// fill the page cuts off the content the demo exists to show. Any letterbox
+// falls on the page's own background, which reads as margin rather than as a
+// broken frame.
+//
+// The paper-curl flip (bend, shadow, highlight sweep) is handled by
 // react-pageflip/StPageFlip on the page root this ref is attached to — this
 // component only owns the content, not the turn animation.
 const VideoPage = React.forwardRef<HTMLDivElement, { video: VideoItem; active: boolean }>(
   ({ video, active }, ref) => {
     const [errored, setErrored] = useState(false);
-    // Demos arrive in two shapes: portrait phone mockups, and landscape screen
-    // recordings. Portrait fills the page; landscape has to be letterboxed, or
-    // object-cover would crop ~62% off its width.
-    const [isLandscape, setIsLandscape] = useState(false);
     const videoRef = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
@@ -44,15 +47,7 @@ const VideoPage = React.forwardRef<HTMLDivElement, { video: VideoItem; active: b
             controls={active}
             poster={video.poster}
             preload={active ? "auto" : "none"}
-            onLoadedMetadata={(e) => {
-              const el = e.currentTarget;
-              if (el.videoWidth && el.videoHeight) {
-                setIsLandscape(el.videoWidth / el.videoHeight > 1);
-              }
-            }}
-            className={`absolute inset-0 w-full h-full ${
-              isLandscape ? "object-contain" : "object-cover"
-            }`}
+            className="absolute inset-0 w-full h-full object-contain"
             onError={() => setErrored(true)}
           />
         )}
@@ -197,13 +192,17 @@ export function VideosWindow({ data }: { data: PortfolioData }) {
           <div className="flex-1 flex items-center justify-center p-4 min-h-0">
             <HTMLFlipBook
               ref={bookRef}
-              width={340}
-              height={510}
+              // Landscape pages: these demos are recordings of desktop sites,
+              // so the page is shaped like a browser window rather than a phone.
+              // width/height also act as the aspect ratio that size="stretch"
+              // preserves while scaling between the min/max bounds.
+              width={520}
+              height={340}
               size="stretch"
-              minWidth={260}
-              maxWidth={560}
-              minHeight={300}
-              maxHeight={840}
+              minWidth={360}
+              maxWidth={760}
+              minHeight={235}
+              maxHeight={500}
               startPage={0}
               drawShadow
               flippingTime={800}
