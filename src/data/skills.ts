@@ -1,25 +1,10 @@
 import { Skill } from "@/types/portfolio";
 
-export const skills: Skill[] = [
-  // Languages
-  { name: "TypeScript", category: "Languages" },
-  { name: "JavaScript", category: "Languages" },
-  { name: "HTML/CSS", category: "Languages" },
-  
-  // Frameworks & Libraries
-  { name: "React", category: "Frameworks & Libraries" },
-  { name: "Next.js", category: "Frameworks & Libraries" },
-  { name: "Tailwind CSS", category: "Frameworks & Libraries" },
-  { name: "Framer Motion", category: "Frameworks & Libraries" },
-  
-  // Backend & Database
-  { name: "Node.js", category: "Backend & Database" },
-  { name: "PostgreSQL", category: "Backend & Database" },
-  { name: "Prisma", category: "Backend & Database" },
-  { name: "Supabase", category: "Backend & Database" },
-  
-  // Tools
-  { name: "Git", category: "Tools" },
-  { name: "Figma", category: "Tools" },
-  { name: "VS Code", category: "Tools" },
-];
+// Cleared: this held the upstream template's demo list (TypeScript, React,
+// Node…) which described a frontend developer, not this client. The Terminal
+// app's `skills` command reads from here too, so leaving it populated would
+// have surfaced the wrong content even with the Skills app removed.
+//
+// Repopulate with real disciplines (e.g. "Colour grading", "Directing") and
+// add a dock entry back in folders.ts if the Skills app is wanted.
+export const skills: Skill[] = [];

@@ -64,14 +64,15 @@ export const workspaceRoot: FolderItem = {
       id: DOCK_ID,
       name: "Dock",
       kind: "folder",
+      // Skills, Experience, Notes and Music were removed here: they still held
+      // the upstream template's demo content (a frontend developer's CV and a
+      // post about building the template), which has nothing to do with this
+      // client. Their components are untouched — add an entry back once there
+      // is real content to put in them.
       children: [
         { id: "dock-about", name: "About Me", kind: "app", appId: "about" },
-        { id: "dock-skills", name: "Skills", kind: "app", appId: "skills" },
-        { id: "dock-experience", name: "Experience", kind: "app", appId: "experience" },
-        { id: "dock-music", name: "Music", kind: "app", appId: "music" },
-        { id: "dock-terminal", name: "Terminal", kind: "app", appId: "terminal" },
-        { id: "dock-notes", name: "Notes", kind: "app", appId: "notes" },
         { id: "dock-photos", name: "Photos", kind: "app", appId: "photos" },
+        { id: "dock-terminal", name: "Terminal", kind: "app", appId: "terminal" },
       ],
     },
   ],
