@@ -3,6 +3,7 @@
 import React, { useState, useRef, useMemo, useCallback, useEffect } from "react";
 import { FolderItem, PortfolioData } from "@/types/portfolio";
 import { Dock } from "./Dock";
+import { MenuBar } from "./MenuBar";
 import { MacWindow } from "./MacWindow";
 import { FolderWindow } from "./windows";
 import { appRegistry } from "@/data/appRegistry";
@@ -410,8 +411,15 @@ export function DesktopView({ data, initialApp }: { data: PortfolioData; initial
     return () => window.removeEventListener("keydown", onKey);
   }, [undo, redo, renamingId]);
 
-  // Frontmost visible window — the only one that renders as focused.
-  const frontmostKey = [...windows].reverse().find((w) => !w.minimized)?.key ?? null;
+  // Frontmost visible window — the only one that renders as focused, and the
+  // name the menu bar shows as the active app.
+  const frontmost = [...windows].reverse().find((w) => !w.minimized) ?? null;
+  const frontmostKey = frontmost?.key ?? null;
+  const frontmostName = frontmost
+    ? frontmost.kind === "app"
+      ? frontmost.title
+      : findNode(tree, frontmost.folderId)?.name ?? null
+    : null;
   const minimizedWindows = windows.filter((w) => w.minimized);
 
   // Desktop and dock are both folders in the tree, so their icons are simply
@@ -423,6 +431,8 @@ export function DesktopView({ data, initialApp }: { data: PortfolioData; initial
 
   return (
     <div className="w-full h-full relative overflow-hidden font-sans">
+      <MenuBar activeAppName={frontmostName} onSearchClick={() => setIsSearchOpen(true)} />
+
       {/* Spotlight Search Overlay */}
       <SpotlightSearch 
         isOpen={isSearchOpen} 
