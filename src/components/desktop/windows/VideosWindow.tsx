@@ -12,6 +12,10 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const VideoPage = React.forwardRef<HTMLDivElement, { video: VideoItem; active: boolean }>(
   ({ video, active }, ref) => {
     const [errored, setErrored] = useState(false);
+    // Demos arrive in two shapes: portrait phone mockups, and landscape screen
+    // recordings. Portrait fills the page; landscape has to be letterboxed, or
+    // object-cover would crop ~62% off its width.
+    const [isLandscape, setIsLandscape] = useState(false);
     const videoRef = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
@@ -40,7 +44,15 @@ const VideoPage = React.forwardRef<HTMLDivElement, { video: VideoItem; active: b
             controls={active}
             poster={video.poster}
             preload={active ? "auto" : "none"}
-            className="absolute inset-0 w-full h-full object-cover"
+            onLoadedMetadata={(e) => {
+              const el = e.currentTarget;
+              if (el.videoWidth && el.videoHeight) {
+                setIsLandscape(el.videoWidth / el.videoHeight > 1);
+              }
+            }}
+            className={`absolute inset-0 w-full h-full ${
+              isLandscape ? "object-contain" : "object-cover"
+            }`}
             onError={() => setErrored(true)}
           />
         )}
