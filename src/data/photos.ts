@@ -1,22 +1,58 @@
 import { Photo } from "@/types/portfolio";
 
-// Screens captured from the live client sites, grouped into an album per
-// project. `album` drives the folder view in the Photos app; `albumUrl` links
-// the album header to the live site.
+// One album per project. `album` drives the folder view in the Photos app;
+// `albumUrl` links the album header to the live site.
+//
+// Most albums hold screens captured from the live site. Zaytoun holds the
+// brand collateral produced alongside it instead — the site itself is already
+// covered by its demo in public/videos, so the album shows the identity work
+// rather than repeating the same screens.
 export const photos: Photo[] = [
   // ---- Zaytoun ----
   {
-    id: "zaytoun-home",
-    url: "/photos/zaytoun-home.jpg",
-    caption: "Hero — bilingual Arabic/English fine dining in Amman.",
+    id: "zaytoun-origin",
+    url: "/photos/zaytoun-origin.jpg",
+    caption: "Origin story — the family kitchen in Jabal Al-Weibdeh.",
     date: "2026",
     album: "Zaytoun",
     albumUrl: "https://zaytoun-restaurant.vercel.app/",
   },
   {
-    id: "zaytoun-menu",
-    url: "/photos/zaytoun-menu.jpg",
-    caption: "Menu, with dietary markers and course filtering.",
+    id: "zaytoun-kitchen",
+    url: "/photos/zaytoun-kitchen.jpg",
+    caption: "Positioning card — 120 covers, cooked like a home kitchen.",
+    date: "2026",
+    album: "Zaytoun",
+    albumUrl: "https://zaytoun-restaurant.vercel.app/",
+  },
+  {
+    id: "zaytoun-love",
+    url: "/photos/zaytoun-love.jpg",
+    caption: "Campaign key art, on the same serif and olive palette as the site.",
+    date: "2026",
+    album: "Zaytoun",
+    albumUrl: "https://zaytoun-restaurant.vercel.app/",
+  },
+  {
+    id: "zaytoun-ingredients",
+    url: "/photos/zaytoun-ingredients.jpg",
+    caption: "Sourcing message for the social grid.",
+    date: "2026",
+    album: "Zaytoun",
+    albumUrl: "https://zaytoun-restaurant.vercel.app/",
+  },
+  {
+    id: "zaytoun-ouzi",
+    url: "/photos/zaytoun-ouzi.jpg",
+    caption: "Signature dish card — Lamb Ouzi, priced as on the menu.",
+    date: "2026",
+    album: "Zaytoun",
+    albumUrl: "https://zaytoun-restaurant.vercel.app/",
+  },
+  {
+    id: "zaytoun-reserve",
+    url: "/photos/zaytoun-reserve.jpg",
+    caption: "Reservations call to action.",
     date: "2026",
     album: "Zaytoun",
     albumUrl: "https://zaytoun-restaurant.vercel.app/",
