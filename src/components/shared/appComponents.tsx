@@ -39,19 +39,20 @@ import { findNode } from "@/lib/folderTree";
  * 3. Provide a factory function that receives PortfolioData.
  */
 
+/**
+ * `openApp` lets a window launch another one — the Terminal uses it for its
+ * `open` command. Windows that don't launch anything ignore it.
+ */
 export const desktopComponentMap: Record<
   string,
-  (data: PortfolioData) => React.ReactNode
+  (data: PortfolioData, openApp: (id: string) => void) => React.ReactNode
 > = {
   about: (data) => <AboutWindow data={data} />,
-  // NOTE: on desktop, "projects" is intercepted by the folder routing in
-  // src/data/folders.ts and opens as a folder window instead of this component.
-  // Remove its entry from `appFolders` there to get this table back.
   projects: (data) => <ProjectsWindow data={data} />,
   skills: (data) => <SkillsWindow data={data} />,
   experience: (data) => <ExperienceWindow data={data} />,
   music: (data) => <MusicWindow data={data} />,
-  terminal: (data) => <TerminalWindow data={data} />,
+  terminal: (data, openApp) => <TerminalWindow data={data} onOpenApp={openApp} />,
   notes: (data) => <NotesWindow data={data} />,
   photos: (data) => <PhotosWindow data={data} />,
   videos: (data) => <VideosWindow data={data} />,

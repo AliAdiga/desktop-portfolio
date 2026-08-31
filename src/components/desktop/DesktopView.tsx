@@ -518,7 +518,7 @@ export function DesktopView({ data, initialApp }: { data: PortfolioData; initial
                 )}
               >
                 {win.kind === "app" ? (
-                  desktopComponentMap[win.appId](data)
+                  desktopComponentMap[win.appId](data, openApp)
                 ) : (
                   <FolderWindow
                     node={folderNode!}

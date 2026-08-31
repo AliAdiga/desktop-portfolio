@@ -8,7 +8,14 @@ interface CommandHistory {
   content: string | React.ReactNode;
 }
 
-export function TerminalWindow({ data }: { data: PortfolioData }) {
+export function TerminalWindow({
+  data,
+  onOpenApp,
+}: {
+  data: PortfolioData;
+  /** Lets the terminal actually drive the desktop rather than only print. */
+  onOpenApp?: (appId: string) => void;
+}) {
   const promptName = `visitor@${data.profile.name.toLowerCase().replace(/\s+/g, '')}`;
   const promptSymbol = ":~$";
 
@@ -54,6 +61,10 @@ export function TerminalWindow({ data }: { data: PortfolioData }) {
             <span className="text-green-400">about</span><span>Shows my bio</span>
             <span className="text-green-400">skills</span><span>Lists my technical skills</span>
             <span className="text-green-400">projects</span><span>Lists my latest projects</span>
+            <span className="text-green-400">experience</span><span>Shows my work history</span>
+            <span className="text-green-400">stack</span><span>Full stack, grouped by area</span>
+            <span className="text-green-400">open</span><span>Opens an app — e.g. <span className="opacity-70">open projects</span></span>
+            <span className="text-green-400">ls</span><span>Lists the apps you can open</span>
             <span className="text-green-400">contact</span><span>Shows contact info and social links</span>
             <span className="text-green-400">clear</span><span>Clears the terminal</span>
             <span className="text-green-400">date</span><span>Shows current date and time</span>
@@ -124,6 +135,71 @@ export function TerminalWindow({ data }: { data: PortfolioData }) {
 
       case "echo":
         output = args.slice(1).join(" ");
+        break;
+
+      case "open": {
+        const target = (args[1] || "").toLowerCase();
+        const known = ["about", "projects", "skills", "experience", "photos", "videos", "magazine", "notes", "terminal"];
+        if (!target) {
+          output = <span className="text-yellow-400">Usage: open &lt;app&gt; — try {known.slice(0, 5).join(", ")}</span>;
+        } else if (!known.includes(target)) {
+          output = <span className="text-red-400">No app called &quot;{target}&quot;. Try: {known.join(", ")}</span>;
+        } else if (!onOpenApp) {
+          output = <span className="text-red-400">Opening apps isn&apos;t available here.</span>;
+        } else {
+          onOpenApp(target);
+          output = <span className="text-green-400">Opening {target}…</span>;
+        }
+        break;
+      }
+
+      case "ls":
+        output = (
+          <div className="grid grid-cols-[100px_1fr] gap-2">
+            <span className="text-purple-400">apps</span>
+            <span>about projects skills experience photos videos magazine notes</span>
+            <span className="text-purple-400">tip</span>
+            <span className="opacity-70">open &lt;app&gt; launches one</span>
+          </div>
+        );
+        break;
+
+      case "stack": {
+        const byCat = data.skills.reduce<Record<string, string[]>>((acc, s2) => {
+          (acc[s2.category] ||= []).push(s2.name);
+          return acc;
+        }, {});
+        output = (
+          <div className="flex flex-col gap-1">
+            {Object.entries(byCat).map(([cat, names]) => (
+              <div key={cat} className="grid grid-cols-[150px_1fr] gap-2">
+                <span className="text-purple-400">{cat}</span>
+                <span>{names.join(", ")}</span>
+              </div>
+            ))}
+          </div>
+        );
+        break;
+      }
+
+      case "experience":
+        output = (
+          <div className="flex flex-col gap-2">
+            {data.experience.map((e) => (
+              <div key={e.id} className="flex flex-col">
+                <span>
+                  <span className="font-bold text-yellow-400">{e.role}</span>
+                  <span className="opacity-60"> — {e.company} · {e.period}</span>
+                </span>
+                <span className="opacity-80">{e.description}</span>
+              </div>
+            ))}
+          </div>
+        );
+        break;
+
+      case "sudo":
+        output = <span className="text-yellow-400">Nice try.</span>;
         break;
 
       default:
