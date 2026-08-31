@@ -1,21 +1,28 @@
 import { Experience } from "@/types/portfolio";
 
-// PLACEHOLDER — replace with your real roles.
+// Written from verifiable evidence: the public repo history on GitHub
+// (May–Aug 2026) and the live sites themselves.
+//
+// TWO THINGS TO CORRECT — I had no way to determine either:
+//   1. The engagement type. "Freelance" is an assumption; change it if this was
+//      employed, agency or contract work.
+//   2. Anything before May 2026. If you have earlier roles, they belong above
+//      this entry — the list renders newest first.
 export const experience: Experience[] = [
   {
-    id: "exp-1",
-    role: "Your role",
-    company: "Company or client",
-    period: "2024 — Present",
+    id: "exp-freelance-2026",
+    role: "Freelance Web Developer",
+    company: "Independent",
+    period: "2026 — Present",
     description:
-      "What you owned, what you shipped, and the impact. One or two sentences — specifics beat adjectives.",
+      "Designed and shipped production sites across hospitality, retail, legal and healthcare — including bilingual Arabic/English builds with full RTL layout. Work spans e-commerce with cart and product flows, appointment and consultation booking, and content-driven marketing sites.",
   },
   {
-    id: "exp-2",
-    role: "Previous role",
-    company: "Company or client",
-    period: "2022 — 2024",
+    id: "exp-product-2026",
+    role: "Full-Stack Developer",
+    company: "Product & side projects",
+    period: "2026",
     description:
-      "Another role. Lead with what you built rather than what you were responsible for.",
+      "Built FinFlow, a SaaS revenue-intelligence dashboard covering MRR/ARR tracking, churn prediction and attribution behind an authenticated shell; and the Node/Express leaderboard service behind Foxy Dash, an HTML5 endless runner — score submission, per-difficulty rankings and rank-on-submit.",
   },
 ];

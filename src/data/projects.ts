@@ -49,6 +49,38 @@ export const projects: Project[] = [
     year: "2026",
   },
   {
+    id: "finflow",
+    title: "FinFlow",
+    description:
+      "Revenue-intelligence dashboard for SaaS teams — MRR and ARR tracking, churn prediction, multi-channel attribution and automated reporting, behind an authenticated app shell.",
+    techStack: ["Next.js", "TypeScript", "Tailwind"],
+    thumbnail: "/projects/finflow.jpg",
+    liveUrl: "https://finflow-dashboard-kohl.vercel.app",
+    githubUrl: "https://github.com/AliAdiga/finflow-dashboard",
+    year: "2026",
+  },
+  {
+    id: "void-studio",
+    title: "Void Studio",
+    description:
+      "Site for a creative and design studio, built around bold display typography and a kinetic word-grid — brand identities, campaigns and digital work.",
+    techStack: ["Next.js", "TypeScript", "Tailwind"],
+    thumbnail: "/projects/void-studio.jpg",
+    liveUrl: "https://void-studio-theta.vercel.app",
+    githubUrl: "https://github.com/AliAdiga/void-studio",
+    year: "2026",
+  },
+  {
+    id: "foxy-dash",
+    title: "Foxy Dash — Leaderboard API",
+    description:
+      "Node/Express service backing an HTML5 endless runner: score submission, per-difficulty top-20 rankings and rank-on-submit, over a file-backed store that needs no database to run.",
+    techStack: ["Node.js", "Express", "JavaScript", "REST"],
+    thumbnail: "",
+    githubUrl: "https://github.com/AliAdiga/foxydash-leaderboard",
+    year: "2026",
+  },
+  {
     id: "desktop-portfolio",
     title: "Desktop Portfolio",
     description:
