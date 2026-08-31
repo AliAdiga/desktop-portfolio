@@ -2,9 +2,9 @@ import { Project } from "@/types/portfolio";
 
 // Thumbnails live in public/projects/ at 1600x900 (16:9 is what the grid expects).
 //
-// NOTE ON techStack: the descriptions below come from the live sites, but the
-// stacks are an educated guess from the fact they're deployed on Vercel.
-// Correct them — an inaccurate stack list is worse than a short one.
+// techStack is read from each repo's package.json, except Zaytoun and Vestra —
+// those repos are private or have no readable manifest, so their stacks are
+// still a guess. Correct those two.
 export const projects: Project[] = [
   {
     id: "zaytoun",
@@ -32,8 +32,8 @@ export const projects: Project[] = [
     id: "cedar-stone",
     title: "Cedar Stone Legal",
     description:
-      "Marketing site for a law firm: practice areas, team profiles, FAQ and a consultation booking flow. Bilingual Arabic/English.",
-    techStack: ["Next.js", "React", "Tailwind"],
+      "Marketing site for a law firm: practice areas, team profiles, FAQ and a consultation booking flow. Bilingual Arabic/English, with scroll-driven animation throughout.",
+    techStack: ["Next.js", "TypeScript", "Tailwind", "GSAP", "Lenis"],
     thumbnail: "/projects/cedar-stone.jpg",
     liveUrl: "https://cedar-stone-legal.vercel.app/",
     year: "2026",
@@ -43,7 +43,7 @@ export const projects: Project[] = [
     title: "Evercare Medical Center",
     description:
       "Hospital site covering departments, consultants and facilities, with online booking and a patient portal entry point.",
-    techStack: ["Next.js", "React", "Tailwind"],
+    techStack: ["Next.js", "TypeScript", "Tailwind", "Framer Motion"],
     thumbnail: "/projects/evercare.jpg",
     liveUrl: "https://evercare-hospital-blush.vercel.app/",
     year: "2026",
@@ -52,8 +52,8 @@ export const projects: Project[] = [
     id: "finflow",
     title: "FinFlow",
     description:
-      "Revenue-intelligence dashboard for SaaS teams — MRR and ARR tracking, churn prediction, multi-channel attribution and automated reporting, behind an authenticated app shell.",
-    techStack: ["Next.js", "TypeScript", "Tailwind"],
+      "Revenue-intelligence dashboard for SaaS teams — MRR and ARR tracking, churn prediction, multi-channel attribution and automated reporting. Supabase handles auth and data; the charting is built on Recharts.",
+    techStack: ["Next.js", "TypeScript", "Supabase", "Recharts", "Tailwind"],
     thumbnail: "/projects/finflow.jpg",
     liveUrl: "https://finflow-dashboard-kohl.vercel.app",
     githubUrl: "https://github.com/AliAdiga/finflow-dashboard",

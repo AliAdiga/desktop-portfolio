@@ -3,11 +3,9 @@ import { Experience } from "@/types/portfolio";
 // Written from verifiable evidence: the public repo history on GitHub
 // (May–Aug 2026) and the live sites themselves.
 //
-// TWO THINGS TO CORRECT — I had no way to determine either:
-//   1. The engagement type. "Freelance" is an assumption; change it if this was
-//      employed, agency or contract work.
-//   2. Anything before May 2026. If you have earlier roles, they belong above
-//      this entry — the list renders newest first.
+// TO CORRECT:
+//   Anything before May 2026 is unknown to me. If you have earlier roles, they
+//   belong above these — the list renders newest first.
 export const experience: Experience[] = [
   {
     id: "exp-freelance-2026",
@@ -23,6 +21,6 @@ export const experience: Experience[] = [
     company: "Product & side projects",
     period: "2026",
     description:
-      "Built FinFlow, a SaaS revenue-intelligence dashboard covering MRR/ARR tracking, churn prediction and attribution behind an authenticated shell; and the Node/Express leaderboard service behind Foxy Dash, an HTML5 endless runner — score submission, per-difficulty rankings and rank-on-submit.",
+      "Built FinFlow, a SaaS revenue-intelligence dashboard covering MRR/ARR tracking, churn prediction and attribution, with Supabase for authentication and data and Recharts for the visualisations. Also the Node/Express leaderboard service behind Foxy Dash, an HTML5 endless runner — score submission, per-difficulty rankings and rank-on-submit.",
   },
 ];
