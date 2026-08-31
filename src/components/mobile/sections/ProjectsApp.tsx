@@ -7,7 +7,8 @@ import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 
 function openProject(project: Project) {
-  if (project.url) window.open(project.url, "_blank", "noopener,noreferrer");
+  const target = project.liveUrl ?? project.githubUrl;
+  if (target) window.open(target, "_blank", "noopener,noreferrer");
 }
 
 function ProjectThumb({ project }: { project: Project }) {
@@ -47,10 +48,12 @@ export function ProjectsApp({ data }: { data: PortfolioData }) {
             <div className="flex-1 min-w-0">
               <p className="text-white font-semibold text-sm truncate">{project.title}</p>
               <p className="text-white/50 text-xs mt-0.5 truncate">
-                {project.client} · {project.category} · {project.year}
+                {project.techStack.join(" · ")}
               </p>
             </div>
-            {project.url && <ExternalLink size={14} className="text-white/30 shrink-0" />}
+            {(project.liveUrl || project.githubUrl) && (
+              <ExternalLink size={14} className="text-white/30 shrink-0" />
+            )}
           </motion.button>
         ))
       )}

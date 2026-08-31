@@ -12,12 +12,18 @@ export type Skill = {
 export type Project = {
   id: string;
   title: string;
-  client: string;
-  category: string;
-  year: string;
+  /** One or two sentences: what it is, and what you actually built. */
+  description: string;
+  /** Technologies worth naming. Rendered as chips. */
+  techStack: string[];
   thumbnail: string;
-  /** Optional link to the live piece / case study. */
-  url?: string;
+  /** Deployed site, if there is one. */
+  liveUrl?: string;
+  /** Source, if it's public. */
+  githubUrl?: string;
+  year?: string;
+  /** Pin to the top of the list and give it a marker. */
+  featured?: boolean;
 };
 
 export type Experience = {

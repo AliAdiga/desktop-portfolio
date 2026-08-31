@@ -39,23 +39,15 @@ export const workspaceRoot: FolderItem = {
       name: "Desktop",
       kind: "folder",
       children: [
-        {
-          id: "desktop-videos",
-          name: "untitled videos",
-          kind: "app",
-          appId: "videos",
-        },
+        { id: "desktop-projects", name: "Projects", kind: "app", appId: "projects" },
+        { id: "desktop-demos", name: "Demos", kind: "app", appId: "videos" },
         {
           id: PROJECTS_FOLDER_ID,
-          name: "Projects",
+          name: "Writing",
           kind: "folder",
           children: [
-            {
-              id: "projects-magazine",
-              name: "Magazine",
-              kind: "app",
-              appId: "magazine",
-            },
+            { id: "writing-notes", name: "Notes", kind: "app", appId: "notes" },
+            { id: "writing-magazine", name: "Magazine", kind: "app", appId: "magazine" },
           ],
         },
       ],
@@ -64,9 +56,8 @@ export const workspaceRoot: FolderItem = {
       id: DOCK_ID,
       name: "Dock",
       kind: "folder",
-      // Notes and Music stay out: they held the template's demo blog posts and
-      // playlist, and nothing has been written to replace them. Add an entry
-      // back once there is real content.
+      // Music stays out — it held the template's demo playlist and nothing has
+      // replaced it. Add an entry back if you ever want it.
       children: [
         { id: "dock-about", name: "About Me", kind: "app", appId: "about" },
         { id: "dock-skills", name: "Skills", kind: "app", appId: "skills" },
@@ -87,5 +78,6 @@ export const workspaceRoot: FolderItem = {
  * getting the Projects table back instead of the folder view.
  */
 export const appFolders: Record<string, string> = {
-  projects: PROJECTS_FOLDER_ID,
+  // Projects opens ProjectsWindow (real case studies), not a folder view.
+  // Map an app id to a folder id here to make it open as a folder instead.
 };

@@ -94,7 +94,7 @@ export function TerminalWindow({ data }: { data: PortfolioData }) {
           <ul className="list-disc list-inside">
             {data.projects.map(p => (
               <li key={p.id}>
-                <span className="font-bold text-yellow-400">{p.title}</span> - {p.client} ({p.year})
+                <span className="font-bold text-yellow-400">{p.title}</span> - {p.techStack.join(", ")}
               </li>
             ))}
           </ul>

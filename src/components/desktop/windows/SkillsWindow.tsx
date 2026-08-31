@@ -3,7 +3,7 @@
 import React from "react";
 import { PortfolioData } from "@/types/portfolio";
 import { motion } from "framer-motion";
-import { Clapperboard, Video, Scissors, Mic, Palette } from "lucide-react";
+import { Code2, Layers, Database, Wrench, Palette } from "lucide-react";
 import { ICON_STROKE } from "@/lib/iconStyles";
 
 /**
@@ -17,10 +17,10 @@ import { ICON_STROKE } from "@/lib/iconStyles";
 const getCategoryIcon = (category: string) => {
   const c = category.toLowerCase();
   const props = { size: 18, strokeWidth: ICON_STROKE };
-  if (c.includes("direct")) return <Clapperboard {...props} />;
-  if (c.includes("camera") || c.includes("shoot")) return <Video {...props} />;
-  if (c.includes("post") || c.includes("edit")) return <Scissors {...props} />;
-  if (c.includes("sound") || c.includes("audio")) return <Mic {...props} />;
+  if (c.includes("language")) return <Code2 {...props} />;
+  if (c.includes("framework") || c.includes("librar")) return <Layers {...props} />;
+  if (c.includes("backend") || c.includes("database") || c.includes("data")) return <Database {...props} />;
+  if (c.includes("tool") || c.includes("devops") || c.includes("infra")) return <Wrench {...props} />;
   return <Palette {...props} />;
 };
 

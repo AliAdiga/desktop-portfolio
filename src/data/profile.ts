@@ -2,9 +2,9 @@ import { Profile, SocialLink } from "@/types/portfolio";
 
 // Fill these in with your real details.
 export const profile: Profile = {
-  name: "Your Name",
-  role: "Creative Director",
-  bio: "Crafting thoughtful visual work with clarity and purpose.",
+  name: "Ali Tsai",
+  role: "Software Engineer",
+  bio: "I build things for the web — interfaces, tools, and the systems behind them.",
   avatar: "", // path to a photo, e.g. "/avatar.jpg" — leave empty for an initials fallback
   email: "",
   location: "",

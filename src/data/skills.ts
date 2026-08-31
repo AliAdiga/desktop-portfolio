@@ -1,23 +1,26 @@
 import { Skill } from "@/types/portfolio";
 
-// PLACEHOLDER — replace every entry with the client's real disciplines.
+// PLACEHOLDER — replace with what you actually work in.
 //
-// `category` is free text: SkillsWindow groups by whatever categories appear
-// here and picks an icon from the wording ("direction", "camera", "post",
-// "sound"). Add or rename categories freely.
+// `category` is free text: SkillsWindow groups by whatever appears here and
+// picks an icon from the wording (language / framework / backend / tools).
 export const skills: Skill[] = [
-  { name: "Creative direction", category: "Direction" },
-  { name: "Concept development", category: "Direction" },
-  { name: "Storyboarding", category: "Direction" },
+  { name: "TypeScript", category: "Languages" },
+  { name: "JavaScript", category: "Languages" },
+  { name: "Python", category: "Languages" },
+  { name: "SQL", category: "Languages" },
 
-  { name: "Cinematography", category: "Camera" },
-  { name: "Lighting", category: "Camera" },
-  { name: "Gimbal operation", category: "Camera" },
-  { name: "Aerial / drone", category: "Camera" },
+  { name: "React", category: "Frameworks & Libraries" },
+  { name: "Next.js", category: "Frameworks & Libraries" },
+  { name: "Tailwind CSS", category: "Frameworks & Libraries" },
+  { name: "Framer Motion", category: "Frameworks & Libraries" },
 
-  { name: "Editing", category: "Post-production" },
-  { name: "Colour grading", category: "Post-production" },
-  { name: "Motion graphics", category: "Post-production" },
+  { name: "Node.js", category: "Backend & Data" },
+  { name: "PostgreSQL", category: "Backend & Data" },
+  { name: "REST & GraphQL", category: "Backend & Data" },
 
-  { name: "Sound design", category: "Sound" },
+  { name: "Git", category: "Tools" },
+  { name: "Docker", category: "Tools" },
+  { name: "Vercel", category: "Tools" },
+  { name: "Figma", category: "Tools" },
 ];
