@@ -72,7 +72,6 @@ interface DesktopIconProps {
   onOpen: (item: FolderItem) => void;
   selectedId: string | null;
   onSelect: (id: string) => void;
-  constraintsRef: React.RefObject<HTMLDivElement | null>;
   onDrop: (clientX: number, clientY: number) => void;
   onContextMenu: (e: React.MouseEvent) => void;
   isRenaming: boolean;
@@ -85,7 +84,6 @@ function DesktopIcon({
   onOpen,
   selectedId,
   onSelect,
-  constraintsRef,
   onDrop,
   onContextMenu,
   isRenaming,
@@ -109,7 +107,11 @@ function DesktopIcon({
       // straight onto a folder icon without opening it.
       data-drop-folder={item.kind === "folder" ? item.id : undefined}
       data-dragging={dragging || undefined}
-      dragConstraints={constraintsRef}
+      // No dragConstraints here on purpose. Passing the desktop ref makes
+      // Framer measure the constraint box on mount and "correct" each icon
+      // into it — but these icons live in an absolutely-positioned flex
+      // column, so that correction translated them hundreds of pixels and
+      // stacked them all on top of each other in the middle of the screen.
       dragMomentum={false}
       onContextMenu={onContextMenu}
       onDragStart={() => {
@@ -450,7 +452,6 @@ export function DesktopView({ data, initialApp }: { data: PortfolioData; initial
               onOpen={(it) => (it.kind === "folder" ? openFolder(it) : openApp(it.appId))}
               selectedId={selectedIcon}
               onSelect={setSelectedIcon}
-              constraintsRef={desktopRef}
               onDrop={handleDrop}
               onContextMenu={(e) => openMenu(e, itemMenu(item))}
               isRenaming={CAN_EDIT_LAYOUT && renamingId === item.id}
