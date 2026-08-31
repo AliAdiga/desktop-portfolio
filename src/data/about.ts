@@ -1,8 +1,10 @@
 import { AboutContent } from "@/types/portfolio";
 
-// PLACEHOLDER COPY — the two paragraphs below are generic and should be
-// rewritten in the client's own voice before launch. The lists are the shape
-// to fill in, not real credits.
+// DRAFT — written to be edited. The two paragraphs read as a starting point in
+// a neutral engineering voice; rewrite them in yours. Specifics beat adjectives:
+// name the systems, the scale, the problems. Sections with empty arrays are
+// hidden automatically, so leave `awards` and `clients` empty until they'd
+// actually add something.
 export const aboutContent: AboutContent = {
   // Drop 2-3 images into public/about/ and list them here for the intro gallery.
   images: [
@@ -10,22 +12,23 @@ export const aboutContent: AboutContent = {
     // "/about/work-2.jpg",
     // "/about/work-3.jpg",
   ],
+
   whatIDo:
-    "I craft visuals, films, and identities that are both beautiful and purposeful. My work focuses on turning ideas into clear, memorable imagery.",
+    "I build for the web — interfaces people actually enjoy using, and the systems that keep them fast and predictable. Most of my work is TypeScript and React, usually somewhere in the overlap between design and engineering: the details that decide whether an interface feels considered or merely finished.",
+
   approach:
-    "I believe great work starts with listening. I begin by understanding the story and the goal, then iterate until the visuals feel inevitable.",
+    "I like problems where the obvious solution doesn't quite work. I'd rather understand why something breaks than route around it, and I care about the parts users never see — the state that doesn't get stranded, the edge case that doesn't corrupt anything, the thing that still behaves under load. Shipping matters, but so does what you leave behind for whoever reads the code next.",
+
   offerings: [
-    "Commercial films",
-    "Brand campaigns",
-    "Documentary",
-    "Events",
-    "Colour grading",
-    "Post-production",
+    "Frontend architecture",
+    "Design systems & component libraries",
+    "Interaction & motion design",
+    "Performance and accessibility work",
+    "Full-stack feature delivery",
+    "Prototyping",
   ],
-  awards: [
-    // "Award name — 2026",
-  ],
-  clients: [
-    // "Client name",
-  ],
+
+  // Hidden while empty — add entries only if they'd genuinely add something.
+  awards: [],
+  clients: [],
 };
