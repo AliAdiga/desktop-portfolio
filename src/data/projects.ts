@@ -1,29 +1,61 @@
 import { Project } from "@/types/portfolio";
 
-// PLACEHOLDER — replace with your real work.
+// Thumbnails live in public/projects/ at 1600x900 (16:9 is what the grid expects).
 //
-// Drop thumbnails into public/projects/ (16:9 reads best in the grid).
-// `featured: true` pins a project to the top whatever the sort.
+// NOTE ON techStack: the descriptions below come from the live sites, but the
+// stacks are an educated guess from the fact they're deployed on Vercel.
+// Correct them — an inaccurate stack list is worse than a short one.
 export const projects: Project[] = [
   {
-    id: "project-1",
-    title: "Desktop Portfolio",
+    id: "zaytoun",
+    title: "Zaytoun",
     description:
-      "This site — a macOS-style desktop in the browser, with a window manager, a draggable folder tree and a page-turning reel viewer.",
-    techStack: ["Next.js", "TypeScript", "Tailwind", "Framer Motion"],
-    thumbnail: "/projects/desktop-portfolio.jpg",
+      "Site for an Amman fine-dining restaurant serving ancestral Arabic recipes. Bilingual Arabic/English, with the menu, story and table reservations.",
+    techStack: ["Next.js", "React", "Tailwind"],
+    thumbnail: "/projects/zaytoun.jpg",
+    liveUrl: "https://zaytoun-restaurant.vercel.app/",
     year: "2026",
     featured: true,
-    // liveUrl: "https://your-domain.com",
-    // githubUrl: "https://github.com/you/portfolio",
   },
   {
-    id: "project-2",
-    title: "Project name",
+    id: "vestra",
+    title: "Vestra",
     description:
-      "One or two sentences: what it does, and what you actually built. Name the hard part.",
-    techStack: ["React", "Node.js", "PostgreSQL"],
-    thumbnail: "/projects/project-2.jpg",
-    year: "2025",
+      "Storefront for a jewellery studio working in recycled gold — collections, product pages, size and gift guides, and a cart.",
+    techStack: ["Next.js", "React", "Tailwind"],
+    thumbnail: "/projects/vestra.jpg",
+    liveUrl: "https://vestra-eta.vercel.app/",
+    year: "2026",
+    featured: true,
+  },
+  {
+    id: "cedar-stone",
+    title: "Cedar Stone Legal",
+    description:
+      "Marketing site for a law firm: practice areas, team profiles, FAQ and a consultation booking flow. Bilingual Arabic/English.",
+    techStack: ["Next.js", "React", "Tailwind"],
+    thumbnail: "/projects/cedar-stone.jpg",
+    liveUrl: "https://cedar-stone-legal.vercel.app/",
+    year: "2026",
+  },
+  {
+    id: "evercare",
+    title: "Evercare Medical Center",
+    description:
+      "Hospital site covering departments, consultants and facilities, with online booking and a patient portal entry point.",
+    techStack: ["Next.js", "React", "Tailwind"],
+    thumbnail: "/projects/evercare.jpg",
+    liveUrl: "https://evercare-hospital-blush.vercel.app/",
+    year: "2026",
+  },
+  {
+    id: "desktop-portfolio",
+    title: "Desktop Portfolio",
+    description:
+      "This site — a macOS-style desktop in the browser with a multi-window manager, a drag-and-drop folder tree and a page-turning demo viewer.",
+    techStack: ["Next.js", "TypeScript", "Tailwind", "Framer Motion"],
+    thumbnail: "/projects/desktop-portfolio.jpg",
+    githubUrl: "https://github.com/AliAdiga/desktop-portfolio",
+    year: "2026",
   },
 ];
