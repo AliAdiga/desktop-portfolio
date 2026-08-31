@@ -26,10 +26,10 @@ export function AboutWindow({ data }: { data: PortfolioData }) {
   const current = sections.find((s) => s.id === active) ? active : "intro";
 
   return (
-    <div className="flex h-[calc(100%+3rem)] bg-white -m-6 rounded-b-xl overflow-hidden font-sans text-[#1d1d1f]">
+    <div className="flex h-[calc(100%+3rem)] bg-[#161616] -m-6 rounded-b-xl overflow-hidden font-sans text-white">
       {/* Sidebar */}
-      <div className="w-44 shrink-0 bg-[#f6f6f6] border-r border-black/10 py-4 px-2 overflow-y-auto">
-        <p className="text-[11px] font-semibold text-black/35 uppercase tracking-wide px-2.5 mb-1.5">About me</p>
+      <div className="w-44 shrink-0 bg-[#1f1f1f] border-r border-white/10 py-4 px-2 overflow-y-auto">
+        <p className="text-[11px] font-semibold text-white/35 uppercase tracking-wide px-2.5 mb-1.5">About me</p>
         <nav className="flex flex-col gap-0.5 mb-4">
           {sections.map((s) => (
             <button
@@ -38,7 +38,7 @@ export function AboutWindow({ data }: { data: PortfolioData }) {
               onClick={() => setActive(s.id)}
               className={cn(
                 "text-left text-[13px] px-2.5 py-1.5 rounded-md transition-colors",
-                current === s.id ? "bg-[#0a84ff] text-white font-medium" : "text-black/70 hover:bg-black/5"
+                current === s.id ? "bg-white/15 text-white font-medium" : "text-white/60 hover:bg-white/10"
               )}
             >
               {s.label}
@@ -48,12 +48,12 @@ export function AboutWindow({ data }: { data: PortfolioData }) {
 
         {(profile.email || profile.phone) && (
           <>
-            <p className="text-[11px] font-semibold text-black/35 uppercase tracking-wide px-2.5 mb-1.5">Contact</p>
+            <p className="text-[11px] font-semibold text-white/35 uppercase tracking-wide px-2.5 mb-1.5">Contact</p>
             <nav className="flex flex-col gap-0.5">
               {profile.email && (
                 <a
                   href={`mailto:${profile.email}`}
-                  className="text-left text-[13px] px-2.5 py-1.5 rounded-md text-black/70 hover:bg-black/5"
+                  className="text-left text-[13px] px-2.5 py-1.5 rounded-md text-white/60 hover:bg-white/10"
                 >
                   Email me
                 </a>
@@ -61,7 +61,7 @@ export function AboutWindow({ data }: { data: PortfolioData }) {
               {profile.phone && (
                 <a
                   href={`tel:${profile.phone.replace(/\s+/g, "")}`}
-                  className="text-left text-[13px] px-2.5 py-1.5 rounded-md text-black/70 hover:bg-black/5"
+                  className="text-left text-[13px] px-2.5 py-1.5 rounded-md text-white/60 hover:bg-white/10"
                 >
                   Call me
                 </a>
@@ -76,14 +76,14 @@ export function AboutWindow({ data }: { data: PortfolioData }) {
         {current === "intro" && (
           <div>
             <h1 className="text-2xl font-bold leading-snug mb-6">
-              Hello, my name is <span className="text-[#0a84ff]">{profile.name}</span> — I&apos;m a{" "}
-              <span className="bg-orange-100 text-orange-600 px-1.5 rounded">{profile.role.toLowerCase()}</span>.
+              Hello, my name is <span className="text-white">{profile.name}</span> — I&apos;m a{" "}
+              <span className="text-white/70 border-b border-white/25">{profile.role.toLowerCase()}</span>.
             </h1>
 
             {images.length > 0 && (
               <div className="grid grid-cols-3 gap-3 mb-8">
                 {images.slice(0, 3).map((src) => (
-                  <div key={src} className="relative aspect-[3/4] rounded-lg overflow-hidden bg-black/5">
+                  <div key={src} className="relative aspect-[3/4] rounded-lg overflow-hidden bg-white/5">
                     <Image src={src} alt="" fill sizes="200px" className="object-cover" />
                   </div>
                 ))}
@@ -93,14 +93,14 @@ export function AboutWindow({ data }: { data: PortfolioData }) {
             {about?.whatIDo && (
               <div className="mb-6">
                 <h2 className="font-semibold text-sm mb-1.5">What I Do</h2>
-                <p className="text-black/60 text-sm leading-relaxed">{about.whatIDo}</p>
+                <p className="text-white/60 text-sm leading-relaxed">{about.whatIDo}</p>
               </div>
             )}
 
             {about?.approach && (
               <div className="mb-6">
                 <h2 className="font-semibold text-sm mb-1.5">My Approach</h2>
-                <p className="text-black/60 text-sm leading-relaxed">{about.approach}</p>
+                <p className="text-white/60 text-sm leading-relaxed">{about.approach}</p>
               </div>
             )}
 
@@ -114,7 +114,7 @@ export function AboutWindow({ data }: { data: PortfolioData }) {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#0a84ff] text-sm hover:underline w-fit"
+                      className="text-white/85 text-sm underline decoration-white/30 underline-offset-2 hover:decoration-white transition-colors w-fit"
                     >
                       {link.platform}
                     </a>
@@ -130,7 +130,7 @@ export function AboutWindow({ data }: { data: PortfolioData }) {
             <h1 className="text-xl font-bold mb-5">What I Offer</h1>
             <ul className="flex flex-col gap-2">
               {offerings.map((item) => (
-                <li key={item} className="text-sm text-black/70 bg-black/[0.03] border border-black/10 rounded-lg px-4 py-3">
+                <li key={item} className="text-sm text-white/70 bg-white/[0.03] border border-white/10 rounded-lg px-4 py-3">
                   {item}
                 </li>
               ))}
@@ -143,7 +143,7 @@ export function AboutWindow({ data }: { data: PortfolioData }) {
             <h1 className="text-xl font-bold mb-5">Awards &amp; Press</h1>
             <ul className="flex flex-col gap-2">
               {awards.map((item) => (
-                <li key={item} className="text-sm text-black/70 bg-black/[0.03] border border-black/10 rounded-lg px-4 py-3">
+                <li key={item} className="text-sm text-white/70 bg-white/[0.03] border border-white/10 rounded-lg px-4 py-3">
                   {item}
                 </li>
               ))}
@@ -156,7 +156,7 @@ export function AboutWindow({ data }: { data: PortfolioData }) {
             <h1 className="text-xl font-bold mb-5">Clients</h1>
             <ul className="flex flex-col gap-2">
               {clients.map((item) => (
-                <li key={item} className="text-sm text-black/70 bg-black/[0.03] border border-black/10 rounded-lg px-4 py-3">
+                <li key={item} className="text-sm text-white/70 bg-white/[0.03] border border-white/10 rounded-lg px-4 py-3">
                   {item}
                 </li>
               ))}

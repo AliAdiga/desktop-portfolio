@@ -3,47 +3,25 @@
 import React from "react";
 import { PortfolioData } from "@/types/portfolio";
 import { motion } from "framer-motion";
-import { Layers, Code2, Database, Palette, Wrench } from "lucide-react";
+import { Clapperboard, Video, Scissors, Mic, Palette } from "lucide-react";
+import { ICON_STROKE } from "@/lib/iconStyles";
 
-// Helper to assign a specific icon and color to categories
-const getCategoryStyles = (category: string) => {
-  switch (category.toLowerCase()) {
-    case "languages":
-      return { 
-        icon: <Code2 size={18} />, 
-        bg: "bg-blue-500/15", 
-        border: "border-blue-500/25",
-        text: "text-blue-400" 
-      };
-    case "frameworks & libraries":
-      return { 
-        icon: <Layers size={18} />, 
-        bg: "bg-purple-500/15", 
-        border: "border-purple-500/25",
-        text: "text-purple-400" 
-      };
-    case "backend & database":
-      return { 
-        icon: <Database size={18} />, 
-        bg: "bg-emerald-500/15", 
-        border: "border-emerald-500/25",
-        text: "text-emerald-400" 
-      };
-    case "tools":
-      return { 
-        icon: <Wrench size={18} />, 
-        bg: "bg-orange-500/15", 
-        border: "border-orange-500/25",
-        text: "text-orange-400" 
-      };
-    default:
-      return { 
-        icon: <Palette size={18} />, 
-        bg: "bg-zinc-500/15", 
-        border: "border-zinc-500/25",
-        text: "text-zinc-400" 
-      };
-  }
+/**
+ * Icon per discipline. Categories are free text in the data, so anything
+ * unrecognised falls back to a neutral mark rather than breaking.
+ *
+ * Deliberately monochrome: the rest of the site uses one hairline icon
+ * language, and the original per-category colour chips (blue/purple/emerald,
+ * inherited from the template's developer categories) fought with it.
+ */
+const getCategoryIcon = (category: string) => {
+  const c = category.toLowerCase();
+  const props = { size: 18, strokeWidth: ICON_STROKE };
+  if (c.includes("direct")) return <Clapperboard {...props} />;
+  if (c.includes("camera") || c.includes("shoot")) return <Video {...props} />;
+  if (c.includes("post") || c.includes("edit")) return <Scissors {...props} />;
+  if (c.includes("sound") || c.includes("audio")) return <Mic {...props} />;
+  return <Palette {...props} />;
 };
 
 export function SkillsWindow({ data }: { data: PortfolioData }) {
@@ -53,7 +31,6 @@ export function SkillsWindow({ data }: { data: PortfolioData }) {
     <div className="skills-wrapper">
       <div className="skills-container gap-6 p-2 pb-8">
         {categories.map((cat, catIndex) => {
-          const style = getCategoryStyles(cat);
           const categorySkills = data.skills.filter((s) => s.category === cat);
 
           return (
@@ -66,8 +43,8 @@ export function SkillsWindow({ data }: { data: PortfolioData }) {
             >
               {/* Category Header */}
               <div className="flex items-center gap-4 mb-6 pb-4 border-b border-white/10">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center border shadow-inner ${style.bg} ${style.text} ${style.border}`}>
-                  {style.icon}
+                <div className="w-10 h-10 rounded-[26%] flex items-center justify-center border border-white/25 bg-white/[0.04] text-white/90">
+                  {getCategoryIcon(cat)}
                 </div>
                 <h3 className="text-xl font-bold text-white/90 tracking-wide">
                   {cat}
@@ -84,7 +61,7 @@ export function SkillsWindow({ data }: { data: PortfolioData }) {
                     transition={{ delay: (catIndex * 0.1) + (index * 0.05) + 0.2 }}
                     className="px-4 py-2 rounded-full border bg-white/5 border-white/10 flex items-center gap-2 hover:bg-white/10 transition-colors cursor-default shadow-sm"
                   >
-                    <div className={`w-2 h-2 rounded-full bg-current ${style.text} opacity-80`} />
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/45" />
                     <span className="text-sm font-medium text-white/90">{skill.name}</span>
                   </motion.div>
                 ))}

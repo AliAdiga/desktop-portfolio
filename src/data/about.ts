@@ -1,5 +1,8 @@
 import { AboutContent } from "@/types/portfolio";
 
+// PLACEHOLDER COPY — the two paragraphs below are generic and should be
+// rewritten in the client's own voice before launch. The lists are the shape
+// to fill in, not real credits.
 export const aboutContent: AboutContent = {
   // Drop 2-3 images into public/about/ and list them here for the intro gallery.
   images: [
@@ -12,9 +15,12 @@ export const aboutContent: AboutContent = {
   approach:
     "I believe great work starts with listening. I begin by understanding the story and the goal, then iterate until the visuals feel inevitable.",
   offerings: [
-    // "Brand Identity",
-    // "Photography",
-    // "Videography",
+    "Commercial films",
+    "Brand campaigns",
+    "Documentary",
+    "Events",
+    "Colour grading",
+    "Post-production",
   ],
   awards: [
     // "Award name — 2026",

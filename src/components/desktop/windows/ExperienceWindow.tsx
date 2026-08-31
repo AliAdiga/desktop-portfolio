@@ -18,7 +18,7 @@ export function ExperienceWindow({ data }: { data: PortfolioData }) {
           className="relative pl-12 md:pl-20 py-6 group"
         >
           {/* Timeline Dot with Glow */}
-          <div className="absolute left-6 md:left-[2.85rem] top-10 w-4 h-4 rounded-full bg-blue-500 ring-4 ring-black shadow-[0_0_15px_rgba(59,130,246,0.6)] group-hover:scale-125 transition-transform duration-300 z-10" />
+          <div className="absolute left-6 md:left-[2.85rem] top-10 w-3 h-3 rounded-full bg-white/80 ring-4 ring-black group-hover:scale-125 transition-transform duration-300 z-10" />
           
           <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-xl hover:bg-white/[0.04] hover:border-white/20 transition-all shadow-lg hover:shadow-2xl">
             <div className="flex flex-col md:flex-row md:items-start justify-between mb-4 gap-3">
@@ -26,7 +26,7 @@ export function ExperienceWindow({ data }: { data: PortfolioData }) {
                 <h3 className="text-2xl font-bold text-white tracking-tight mb-1">
                   {exp.role}
                 </h3>
-                <div className="flex items-center gap-2 text-blue-400 font-medium text-lg">
+                <div className="flex items-center gap-2 text-white/60 font-medium text-lg">
                   <Briefcase size={18} />
                   <span>{exp.company}</span>
                 </div>

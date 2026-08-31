@@ -1,10 +1,23 @@
 import { Skill } from "@/types/portfolio";
 
-// Cleared: this held the upstream template's demo list (TypeScript, React,
-// Node…) which described a frontend developer, not this client. The Terminal
-// app's `skills` command reads from here too, so leaving it populated would
-// have surfaced the wrong content even with the Skills app removed.
+// PLACEHOLDER — replace every entry with the client's real disciplines.
 //
-// Repopulate with real disciplines (e.g. "Colour grading", "Directing") and
-// add a dock entry back in folders.ts if the Skills app is wanted.
-export const skills: Skill[] = [];
+// `category` is free text: SkillsWindow groups by whatever categories appear
+// here and picks an icon from the wording ("direction", "camera", "post",
+// "sound"). Add or rename categories freely.
+export const skills: Skill[] = [
+  { name: "Creative direction", category: "Direction" },
+  { name: "Concept development", category: "Direction" },
+  { name: "Storyboarding", category: "Direction" },
+
+  { name: "Cinematography", category: "Camera" },
+  { name: "Lighting", category: "Camera" },
+  { name: "Gimbal operation", category: "Camera" },
+  { name: "Aerial / drone", category: "Camera" },
+
+  { name: "Editing", category: "Post-production" },
+  { name: "Colour grading", category: "Post-production" },
+  { name: "Motion graphics", category: "Post-production" },
+
+  { name: "Sound design", category: "Sound" },
+];
