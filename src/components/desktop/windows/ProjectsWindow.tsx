@@ -70,6 +70,11 @@ function ProjectLinks({ project, size = 12 }: { project: Project; size?: number 
   );
 }
 
+/** Where clicking a card should take you — live site first, source as fallback. */
+function projectHref(project: Project) {
+  return project.liveUrl ?? project.githubUrl ?? null;
+}
+
 function TechChips({ stack, max }: { stack: string[]; max?: number }) {
   const shown = max ? stack.slice(0, max) : stack;
   const extra = max ? stack.length - shown.length : 0;
@@ -149,11 +154,23 @@ export function ProjectsWindow({ data }: { data: PortfolioData }) {
         ) : view === "grid" ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
             {sorted.map((project) => (
-              <article
+              <a
                 key={project.id}
-                className="flex flex-col rounded-xl overflow-hidden border border-white/10 hover:border-white/25 transition-colors bg-white/[0.03]"
+                href={projectHref(project) ?? undefined}
+                target={projectHref(project) ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className={`group flex flex-col rounded-xl overflow-hidden border border-white/10 bg-white/[0.03] transition-colors ${
+                  projectHref(project)
+                    ? "hover:border-white/40 hover:bg-white/[0.06] cursor-pointer"
+                    : "cursor-default"
+                }`}
               >
-                <ProjectThumb project={project} className="w-full aspect-[16/9]" />
+                <div className="overflow-hidden">
+                  <ProjectThumb
+                    project={project}
+                    className="w-full aspect-[16/9] transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                </div>
                 <div className="p-4 flex flex-col gap-2.5 flex-1">
                   <div className="flex items-start justify-between gap-3">
                     <h3 className="font-semibold text-sm leading-snug flex items-center gap-1.5">
@@ -167,7 +184,7 @@ export function ProjectsWindow({ data }: { data: PortfolioData }) {
                   <p className="text-white/55 text-xs leading-relaxed flex-1">{project.description}</p>
                   <TechChips stack={project.techStack} />
                 </div>
-              </article>
+              </a>
             ))}
           </div>
         ) : (
@@ -193,7 +210,16 @@ export function ProjectsWindow({ data }: { data: PortfolioData }) {
             </thead>
             <tbody>
               {sorted.map((project) => (
-                <tr key={project.id} className="border-b border-white/5 hover:bg-white/[0.04]">
+                <tr
+                  key={project.id}
+                  onClick={() => {
+                    const href = projectHref(project);
+                    if (href) window.open(href, "_blank", "noopener,noreferrer");
+                  }}
+                  className={`border-b border-white/5 hover:bg-white/[0.04] ${
+                    projectHref(project) ? "cursor-pointer" : ""
+                  }`}
+                >
                   <td className="px-4 py-2.5">
                     <span className="flex items-center gap-2.5">
                       <ProjectThumb project={project} className="w-9 h-9 rounded shrink-0" />

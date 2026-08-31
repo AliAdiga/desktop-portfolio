@@ -69,6 +69,10 @@ export interface Photo {
   caption: string;
   date: string;
   location?: string;
+  /** Groups photos into an album folder. Photos without one land in "Other". */
+  album?: string;
+  /** Where the album's work lives, linked from the album header. */
+  albumUrl?: string;
 }
 
 export interface VideoItem {

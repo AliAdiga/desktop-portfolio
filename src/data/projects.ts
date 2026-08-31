@@ -70,24 +70,4 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/AliAdiga/void-studio",
     year: "2026",
   },
-  {
-    id: "foxy-dash",
-    title: "Foxy Dash — Leaderboard API",
-    description:
-      "Node/Express service backing an HTML5 endless runner: score submission, per-difficulty top-20 rankings and rank-on-submit, over a file-backed store that needs no database to run.",
-    techStack: ["Node.js", "Express", "JavaScript", "REST"],
-    thumbnail: "",
-    githubUrl: "https://github.com/AliAdiga/foxydash-leaderboard",
-    year: "2026",
-  },
-  {
-    id: "desktop-portfolio",
-    title: "Desktop Portfolio",
-    description:
-      "This site — a macOS-style desktop in the browser with a multi-window manager, a drag-and-drop folder tree and a page-turning demo viewer.",
-    techStack: ["Next.js", "TypeScript", "Tailwind", "Framer Motion"],
-    thumbnail: "/projects/desktop-portfolio.jpg",
-    githubUrl: "https://github.com/AliAdiga/desktop-portfolio",
-    year: "2026",
-  },
 ];
