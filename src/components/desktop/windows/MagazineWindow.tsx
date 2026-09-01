@@ -11,39 +11,39 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 // is attached to, same mechanism as the video reels book.
 const Page = React.forwardRef<HTMLDivElement, { page: MagazinePage }>(({ page }, ref) => {
   return (
-    <div ref={ref} className="relative w-full h-full bg-black overflow-hidden border border-white/10">
+    <div ref={ref} className="relative w-full h-full bg-[var(--win-page-to)] overflow-hidden border border-[color:rgb(var(--win-fg)_/_0.1)]">
       {page.kind === "cover" ? (
         <div className="relative w-full h-full flex items-end p-14">
           {page.image ? (
             <Image src={page.image} alt={page.title} fill sizes="900px" className="object-cover" />
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-[#1c212b] to-[#0a0c11]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--win-page-from)] to-[var(--win-page-to)]" />
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           <div className="relative max-w-xl">
-            <h1 className="text-6xl font-bold text-white tracking-tight leading-none">{page.title}</h1>
-            {page.subtitle && <p className="text-white/60 mt-2">{page.subtitle}</p>}
+            <h1 className="text-6xl font-bold text-[color:rgb(var(--win-fg))] tracking-tight leading-none">{page.title}</h1>
+            {page.subtitle && <p className="text-[color:rgb(var(--win-fg)_/_0.6)] mt-2">{page.subtitle}</p>}
           </div>
           {!page.image && (
-            <span className="absolute bottom-6 left-14 text-white/30 text-[11px]">
+            <span className="absolute bottom-6 left-14 text-[color:rgb(var(--win-fg)_/_0.3)] text-[11px]">
               Set a cover image in src/data/magazine.ts
             </span>
           )}
         </div>
       ) : (
         <div className="flex h-full">
-          <div className="flex-1 relative bg-gradient-to-br from-[#232a35] to-[#12151b] flex items-center justify-center">
+          <div className="flex-1 relative bg-gradient-to-br from-[var(--win-page-from)] to-[var(--win-page-to)] flex items-center justify-center">
             {page.image ? (
               <Image src={page.image} alt={page.heading} fill sizes="450px" className="object-cover" />
             ) : (
-              <span className="text-white/30 text-xs px-6 text-center">
+              <span className="text-[color:rgb(var(--win-fg)_/_0.3)] text-xs px-6 text-center">
                 Add an image path in src/data/magazine.ts
               </span>
             )}
           </div>
           <div className="flex-1 flex flex-col justify-center px-12 py-8">
-            <h2 className="text-3xl font-bold text-white mb-4">{page.heading}</h2>
-            <p className="text-white/60 text-sm leading-relaxed max-w-[46ch]">{page.body}</p>
+            <h2 className="text-3xl font-bold text-[color:rgb(var(--win-fg))] mb-4">{page.heading}</h2>
+            <p className="text-[color:rgb(var(--win-fg)_/_0.6)] text-sm leading-relaxed max-w-[46ch]">{page.body}</p>
           </div>
         </div>
       )}
@@ -82,13 +82,13 @@ export function MagazineWindow({ data }: { data: PortfolioData }) {
   if (pages.length === 0) {
     return (
       <div className="flex items-center justify-center h-full">
-        <p className="text-white/40 text-sm">No magazine pages yet.</p>
+        <p className="text-[color:rgb(var(--win-fg)_/_0.4)] text-sm">No magazine pages yet.</p>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col h-[calc(100%+3rem)] bg-black -m-6 rounded-b-xl overflow-hidden relative">
+    <div className="flex flex-col h-[calc(100%+3rem)] bg-[var(--win-bg)] -m-6 rounded-b-xl overflow-hidden relative">
       <div className="flex-1 flex items-center justify-center p-6 min-h-0">
         <HTMLFlipBook
           ref={bookRef}
@@ -128,10 +128,10 @@ export function MagazineWindow({ data }: { data: PortfolioData }) {
       </div>
 
       {/* Nav */}
-      <div className="flex items-center justify-center gap-5 py-3 bg-black shrink-0">
+      <div className="flex items-center justify-center gap-5 py-3 bg-[var(--win-bg-alt)] shrink-0">
         <button
           type="button"
-          className="w-8 h-8 rounded-full bg-white/6 hover:bg-white/14 disabled:opacity-30 disabled:hover:bg-white/6 flex items-center justify-center text-white transition-colors"
+          className="w-8 h-8 rounded-full bg-[color:rgb(var(--win-fg)_/_0.06)] hover:bg-[color:rgb(var(--win-fg)_/_0.14)] disabled:opacity-30 disabled:hover:bg-[color:rgb(var(--win-fg)_/_0.06)] flex items-center justify-center text-[color:rgb(var(--win-fg))] transition-colors"
           disabled={activeIndex === 0}
           onClick={() => flipTo(activeIndex - 1)}
           aria-label="Previous page"
@@ -146,14 +146,14 @@ export function MagazineWindow({ data }: { data: PortfolioData }) {
               onClick={() => flipTo(i)}
               aria-label={`Page ${i + 1}`}
               className={`w-1.5 h-1.5 rounded-full transition-all ${
-                i === activeIndex ? "bg-white scale-125" : "bg-white/25"
+                i === activeIndex ? "bg-[color:rgb(var(--win-fg))] scale-125" : "bg-[color:rgb(var(--win-fg)_/_0.25)]"
               }`}
             />
           ))}
         </div>
         <button
           type="button"
-          className="w-8 h-8 rounded-full bg-white/6 hover:bg-white/14 disabled:opacity-30 disabled:hover:bg-white/6 flex items-center justify-center text-white transition-colors"
+          className="w-8 h-8 rounded-full bg-[color:rgb(var(--win-fg)_/_0.06)] hover:bg-[color:rgb(var(--win-fg)_/_0.14)] disabled:opacity-30 disabled:hover:bg-[color:rgb(var(--win-fg)_/_0.06)] flex items-center justify-center text-[color:rgb(var(--win-fg))] transition-colors"
           disabled={activeIndex === pages.length - 1}
           onClick={() => flipTo(activeIndex + 1)}
           aria-label="Next page"

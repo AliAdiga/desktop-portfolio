@@ -82,25 +82,25 @@ export function FolderWindow({
 
   return (
     <div
-      className="flex flex-col h-[calc(100%+3rem)] bg-[#161616] -m-6 rounded-b-xl overflow-hidden font-sans select-none"
+      className="flex flex-col h-[calc(100%+3rem)] bg-[var(--win-bg)] -m-6 rounded-b-xl overflow-hidden font-sans select-none"
       onPointerDown={() => setSelected(null)}
     >
       {/* Toolbar */}
-      <div className="bg-[#2d2d2d]/90 backdrop-blur-md px-4 py-2 border-b border-black/20 shrink-0 flex items-center justify-between gap-3">
-        <h2 className="text-white font-bold text-sm truncate">{node.name}</h2>
+      <div className="bg-[var(--win-toolbar)] backdrop-blur-md px-4 py-2 border-b border-[color:var(--win-border)] shrink-0 flex items-center justify-between gap-3">
+        <h2 className="text-[color:rgb(var(--win-fg))] font-bold text-sm truncate">{node.name}</h2>
         <div className="flex items-center gap-3 shrink-0">
           {CAN_EDIT_LAYOUT && onExport && (
             <button
               type="button"
               onClick={handleExport}
-              className="flex items-center gap-1 text-[11px] text-white/45 hover:text-white transition-colors"
+              className="flex items-center gap-1 text-[11px] text-[color:rgb(var(--win-fg)_/_0.45)] hover:text-[color:rgb(var(--win-fg))] transition-colors"
               title="Copy this layout as source for src/data/folders.ts"
             >
               {copied ? <Check size={12} /> : <ClipboardCopy size={12} />}
               {copied ? "Copied" : "Export layout"}
             </button>
           )}
-          <span className="text-white/50 text-xs">
+          <span className="text-[color:rgb(var(--win-fg)_/_0.5)] text-xs">
             {children.length} {children.length === 1 ? "item" : "items"}
           </span>
         </div>
@@ -114,7 +114,7 @@ export function FolderWindow({
       >
         {children.length === 0 ? (
           <div className="flex items-center justify-center h-full min-h-[200px]">
-            <p className="text-white/35 text-sm">Empty folder.</p>
+            <p className="text-[color:rgb(var(--win-fg)_/_0.35)] text-sm">Empty folder.</p>
           </div>
         ) : (
           <div className="grid grid-cols-[repeat(auto-fill,minmax(96px,1fr))] gap-4">
@@ -139,7 +139,7 @@ export function FolderWindow({
                   const ev = e as PointerEvent;
                   onDropOnFolder?.("", ev.clientX, ev.clientY);
                 }}
-                className="flex flex-col items-center gap-1.5 p-2 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                className="flex flex-col items-center gap-1.5 p-2 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[color:rgb(var(--win-fg)_/_0.5)]"
                 onContextMenu={(e) => onContextMenuItem?.(e, item)}
                 onPointerDown={(e) => {
                   e.stopPropagation();
@@ -158,7 +158,7 @@ export function FolderWindow({
                     ICON_FRAME,
                     ICON_FRAME_INTERACTIVE,
                     "w-[60px] h-[60px]",
-                    selected === item.id ? "border-white/70 bg-white/[0.14]" : ""
+                    selected === item.id ? "border-[color:rgb(var(--win-fg)_/_0.7)] bg-[color:rgb(var(--win-fg)_/_0.14)]" : ""
                   )}
                 >
                   <ItemIcon item={item} />
@@ -175,13 +175,15 @@ export function FolderWindow({
                       if (e.key === "Enter") onCommitRename?.(item.id, (e.target as HTMLInputElement).value);
                       if (e.key === "Escape") onCancelRename?.();
                     }}
+                    // A white field with black text in both themes: this is a text input,
+                    // and inheriting the theme foreground would make it dark-on-dark.
                     className="w-full text-[12px] text-center rounded px-1 py-0.5 bg-white text-black outline-none ring-2 ring-[#0060df]"
                   />
                 ) : (
                   <span
                     className={cn(
                       "text-[12px] leading-tight text-center px-1.5 py-0.5 rounded",
-                      selected === item.id ? "bg-[#0060df] text-white" : "text-white/85"
+                      selected === item.id ? "bg-[#0060df] text-[color:rgb(var(--win-fg))]" : "text-[color:rgb(var(--win-fg)_/_0.85)]"
                     )}
                   >
                     {item.name}

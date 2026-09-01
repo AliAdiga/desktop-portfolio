@@ -51,6 +51,24 @@
 
   /* Wallpaper scrim: lifts the dark chrome off a busy wallpaper. */
   --wallpaper-scrim: rgb(0 0 0 / 0.1);
+
+  /* --- App windows ---
+     `--win-fg` is bare RGB channels, not a colour, so the windows can keep
+     using one foreground at a dozen different opacities the way they already
+     did with white/70, white/40 and so on. Written as
+     `rgb(var(--win-fg) / 0.7)`, every one of those alphas survives the theme
+     switch unchanged — only the channels flip. */
+  --win-fg: 255 255 255;
+  --win-bg: #161616;
+  --win-bg-alt: #1a1a1a;
+  --win-toolbar: rgb(45 45 45 / 0.9);
+  --win-titlebar: rgb(60 60 60 / 0.8);
+  /* Inset panels: the About/Projects/Notes sidebars. */
+  --win-sidebar: #1f1f1f;
+  --win-border: rgb(0 0 0 / 0.2);
+  /* Book pages in the Demos reel and the Magazine. */
+  --win-page-from: #1e2129;
+  --win-page-to: #0e1013;
 }
 
 :root[data-theme="light"] {
@@ -80,6 +98,19 @@
   --icon-label-shadow: 0 1px 3px rgb(255 255 255 / 0.9);
 
   --wallpaper-scrim: rgb(255 255 255 / 0.06);
+
+  /* Windows go to ink-on-paper. The foreground is a soft near-black rather
+     than pure #000 so the many low-opacity steps above stay legible instead of
+     turning to flat grey. */
+  --win-fg: 15 23 42;
+  --win-bg: #f7f8fa;
+  --win-bg-alt: #eef1f5;
+  --win-toolbar: rgb(246 247 249 / 0.92);
+  --win-titlebar: rgb(232 235 240 / 0.85);
+  --win-sidebar: #eaedf2;
+  --win-border: rgb(15 23 42 / 0.12);
+  --win-page-from: #ffffff;
+  --win-page-to: #eef1f5;
 }
 
 /* Applied by the icon frames so the tile can carry a shadow in light and none

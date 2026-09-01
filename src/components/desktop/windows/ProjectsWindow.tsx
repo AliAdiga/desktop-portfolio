@@ -19,7 +19,7 @@ const columns: { key: SortKey; label: string }[] = [
 function ProjectThumb({ project, className }: { project: Project; className: string }) {
   const [errored, setErrored] = useState(false);
   if (!project.thumbnail || errored) {
-    return <div className={`${className} bg-gradient-to-br from-white/10 to-white/[0.02]`} />;
+    return <div className={`${className} bg-gradient-to-br from-[rgb(var(--win-fg)_/_0.1)] to-[rgb(var(--win-fg)_/_0.02)]`} />;
   }
   return (
     <div className={`${className} relative overflow-hidden`}>
@@ -46,7 +46,7 @@ function ProjectLinks({ project, size = 12 }: { project: Project; size?: number 
           target="_blank"
           rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
-          className="text-white/45 hover:text-white transition-colors"
+          className="text-[color:rgb(var(--win-fg)_/_0.45)] hover:text-[color:rgb(var(--win-fg))] transition-colors"
           aria-label={`${project.title} — live site`}
           title="Live site"
         >
@@ -59,7 +59,7 @@ function ProjectLinks({ project, size = 12 }: { project: Project; size?: number 
           target="_blank"
           rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
-          className="text-white/45 hover:text-white transition-colors"
+          className="text-[color:rgb(var(--win-fg)_/_0.45)] hover:text-[color:rgb(var(--win-fg))] transition-colors"
           aria-label={`${project.title} — source`}
           title="Source"
         >
@@ -83,12 +83,12 @@ function TechChips({ stack, max }: { stack: string[]; max?: number }) {
       {shown.map((t) => (
         <span
           key={t}
-          className="text-[11px] leading-none px-2 py-1 rounded-full border border-white/15 bg-white/[0.04] text-white/70"
+          className="text-[11px] leading-none px-2 py-1 rounded-full border border-[color:rgb(var(--win-fg)_/_0.15)] bg-[color:rgb(var(--win-fg)_/_0.04)] text-[color:rgb(var(--win-fg)_/_0.7)]"
         >
           {t}
         </span>
       ))}
-      {extra > 0 && <span className="text-[11px] leading-none px-1 py-1 text-white/35">+{extra}</span>}
+      {extra > 0 && <span className="text-[11px] leading-none px-1 py-1 text-[color:rgb(var(--win-fg)_/_0.35)]">+{extra}</span>}
     </span>
   );
 }
@@ -118,17 +118,17 @@ export function ProjectsWindow({ data }: { data: PortfolioData }) {
   }
 
   return (
-    <div className="flex flex-col h-[calc(100%+3rem)] bg-[#161616] -m-6 rounded-b-xl overflow-hidden font-sans text-white">
+    <div className="flex flex-col h-[calc(100%+3rem)] bg-[var(--win-bg)] -m-6 rounded-b-xl overflow-hidden font-sans text-[color:rgb(var(--win-fg))]">
       {/* Toolbar */}
-      <div className="bg-[#2d2d2d]/90 backdrop-blur-md px-4 py-2.5 border-b border-black/20 shrink-0 flex items-center justify-between">
+      <div className="bg-[var(--win-toolbar)] backdrop-blur-md px-4 py-2.5 border-b border-[color:var(--win-border)] shrink-0 flex items-center justify-between">
         <h2 className="font-bold text-sm">Projects</h2>
         <div className="flex items-center gap-3">
-          <span className="text-white/40 text-xs">{sorted.length} items</span>
-          <div className="flex items-center gap-1 bg-white/[0.06] rounded-lg p-0.5">
+          <span className="text-[color:rgb(var(--win-fg)_/_0.4)] text-xs">{sorted.length} items</span>
+          <div className="flex items-center gap-1 bg-[color:rgb(var(--win-fg)_/_0.06)] rounded-lg p-0.5">
             <button
               type="button"
               onClick={() => setView("grid")}
-              className={`p-1.5 rounded-md transition-colors ${view === "grid" ? "bg-white/15 text-white" : "text-white/45 hover:text-white/70"}`}
+              className={`p-1.5 rounded-md transition-colors ${view === "grid" ? "bg-[color:rgb(var(--win-fg)_/_0.15)] text-[color:rgb(var(--win-fg))]" : "text-[color:rgb(var(--win-fg)_/_0.45)] hover:text-[color:rgb(var(--win-fg)_/_0.7)]"}`}
               aria-label="Grid view"
             >
               <LayoutGrid size={14} strokeWidth={ICON_STROKE} />
@@ -136,7 +136,7 @@ export function ProjectsWindow({ data }: { data: PortfolioData }) {
             <button
               type="button"
               onClick={() => setView("list")}
-              className={`p-1.5 rounded-md transition-colors ${view === "list" ? "bg-white/15 text-white" : "text-white/45 hover:text-white/70"}`}
+              className={`p-1.5 rounded-md transition-colors ${view === "list" ? "bg-[color:rgb(var(--win-fg)_/_0.15)] text-[color:rgb(var(--win-fg))]" : "text-[color:rgb(var(--win-fg)_/_0.45)] hover:text-[color:rgb(var(--win-fg)_/_0.7)]"}`}
               aria-label="List view"
             >
               <List size={14} strokeWidth={ICON_STROKE} />
@@ -148,8 +148,8 @@ export function ProjectsWindow({ data }: { data: PortfolioData }) {
       <div className="flex-1 overflow-y-auto">
         {sorted.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full min-h-[300px] gap-1">
-            <p className="text-white/40 text-sm">No projects yet.</p>
-            <p className="text-white/25 text-xs">Add them in src/data/projects.ts</p>
+            <p className="text-[color:rgb(var(--win-fg)_/_0.4)] text-sm">No projects yet.</p>
+            <p className="text-[color:rgb(var(--win-fg)_/_0.25)] text-xs">Add them in src/data/projects.ts</p>
           </div>
         ) : view === "grid" ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
@@ -159,9 +159,9 @@ export function ProjectsWindow({ data }: { data: PortfolioData }) {
                 href={projectHref(project) ?? undefined}
                 target={projectHref(project) ? "_blank" : undefined}
                 rel="noopener noreferrer"
-                className={`group flex flex-col rounded-xl overflow-hidden border border-white/10 bg-white/[0.03] transition-colors ${
+                className={`group flex flex-col rounded-xl overflow-hidden border border-[color:rgb(var(--win-fg)_/_0.1)] bg-[color:rgb(var(--win-fg)_/_0.03)] transition-colors ${
                   projectHref(project)
-                    ? "hover:border-white/40 hover:bg-white/[0.06] cursor-pointer"
+                    ? "hover:border-[color:rgb(var(--win-fg)_/_0.4)] hover:bg-[color:rgb(var(--win-fg)_/_0.06)] cursor-pointer"
                     : "cursor-default"
                 }`}
               >
@@ -175,13 +175,13 @@ export function ProjectsWindow({ data }: { data: PortfolioData }) {
                   <div className="flex items-start justify-between gap-3">
                     <h3 className="font-semibold text-sm leading-snug flex items-center gap-1.5">
                       {project.featured && (
-                        <Star size={11} className="text-white/50 shrink-0" fill="currentColor" strokeWidth={0} />
+                        <Star size={11} className="text-[color:rgb(var(--win-fg)_/_0.5)] shrink-0" fill="currentColor" strokeWidth={0} />
                       )}
                       {project.title}
                     </h3>
                     <ProjectLinks project={project} size={13} />
                   </div>
-                  <p className="text-white/55 text-xs leading-relaxed flex-1">{project.description}</p>
+                  <p className="text-[color:rgb(var(--win-fg)_/_0.55)] text-xs leading-relaxed flex-1">{project.description}</p>
                   <TechChips stack={project.techStack} />
                 </div>
               </a>
@@ -189,13 +189,13 @@ export function ProjectsWindow({ data }: { data: PortfolioData }) {
           </div>
         ) : (
           <table className="w-full text-sm">
-            <thead className="sticky top-0 bg-[#1f1f1f]/95 backdrop-blur">
-              <tr className="border-b border-white/10">
+            <thead className="sticky top-0 bg-[var(--win-sidebar)] backdrop-blur">
+              <tr className="border-b border-[color:rgb(var(--win-fg)_/_0.1)]">
                 {columns.map((col) => (
                   <th
                     key={col.key}
                     onClick={() => toggleSort(col.key)}
-                    className="text-left font-medium text-white/45 px-4 py-2 cursor-pointer select-none hover:text-white/80"
+                    className="text-left font-medium text-[color:rgb(var(--win-fg)_/_0.45)] px-4 py-2 cursor-pointer select-none hover:text-[color:rgb(var(--win-fg)_/_0.8)]"
                   >
                     <span className="inline-flex items-center gap-1">
                       {col.label}
@@ -204,7 +204,7 @@ export function ProjectsWindow({ data }: { data: PortfolioData }) {
                     </span>
                   </th>
                 ))}
-                <th className="text-left font-medium text-white/45 px-4 py-2">Stack</th>
+                <th className="text-left font-medium text-[color:rgb(var(--win-fg)_/_0.45)] px-4 py-2">Stack</th>
                 <th className="w-16" />
               </tr>
             </thead>
@@ -216,7 +216,7 @@ export function ProjectsWindow({ data }: { data: PortfolioData }) {
                     const href = projectHref(project);
                     if (href) window.open(href, "_blank", "noopener,noreferrer");
                   }}
-                  className={`border-b border-white/5 hover:bg-white/[0.04] ${
+                  className={`border-b border-[color:rgb(var(--win-fg)_/_0.05)] hover:bg-[color:rgb(var(--win-fg)_/_0.04)] ${
                     projectHref(project) ? "cursor-pointer" : ""
                   }`}
                 >
@@ -226,15 +226,15 @@ export function ProjectsWindow({ data }: { data: PortfolioData }) {
                       <span className="flex flex-col">
                         <span className="font-medium flex items-center gap-1.5">
                           {project.featured && (
-                            <Star size={10} className="text-white/50" fill="currentColor" strokeWidth={0} />
+                            <Star size={10} className="text-[color:rgb(var(--win-fg)_/_0.5)]" fill="currentColor" strokeWidth={0} />
                           )}
                           {project.title}
                         </span>
-                        <span className="text-white/40 text-xs line-clamp-1">{project.description}</span>
+                        <span className="text-[color:rgb(var(--win-fg)_/_0.4)] text-xs line-clamp-1">{project.description}</span>
                       </span>
                     </span>
                   </td>
-                  <td className="px-4 py-2.5 text-white/60 tabular-nums">{project.year ?? "—"}</td>
+                  <td className="px-4 py-2.5 text-[color:rgb(var(--win-fg)_/_0.6)] tabular-nums">{project.year ?? "—"}</td>
                   <td className="px-4 py-2.5"><TechChips stack={project.techStack} max={3} /></td>
                   <td className="px-4 py-2.5"><ProjectLinks project={project} /></td>
                 </tr>

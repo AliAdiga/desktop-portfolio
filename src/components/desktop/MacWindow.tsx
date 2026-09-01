@@ -67,11 +67,11 @@ export function MacWindow({
       className={cn(
         "flex flex-col overflow-hidden backdrop-blur-2xl border pointer-events-auto",
         !isDragging && "transition-shadow duration-300",
-        "bg-black/60 text-white",
+        "bg-[var(--win-bg)] text-[color:rgb(var(--win-fg))]",
         // Focused windows sit forward with a deeper shadow and brighter edge.
         isFocused
-          ? "border-white/20 shadow-[0_24px_70px_-12px_rgba(0,0,0,0.85)]"
-          : "border-white/10 shadow-[0_12px_36px_-14px_rgba(0,0,0,0.7)]",
+          ? "border-[color:rgb(var(--win-fg)_/_0.2)] shadow-[0_24px_70px_-12px_rgba(0,0,0,0.85)]"
+          : "border-[color:rgb(var(--win-fg)_/_0.1)] shadow-[0_12px_36px_-14px_rgba(0,0,0,0.7)]",
         !isMaximized && className,
         isMaximized && "fixed inset-0 m-0 rounded-none z-[100] w-screen h-screen max-w-none max-h-none !transform-none"
       )}
@@ -79,7 +79,7 @@ export function MacWindow({
       {/* Title Bar - Draggable Area */}
       <div
         className={cn(
-          "group h-10 px-4 flex items-center justify-between border-b bg-white/5 border-white/10 select-none",
+          "group h-10 px-4 flex items-center justify-between border-b bg-[color:rgb(var(--win-fg)_/_0.05)] border-[color:rgb(var(--win-fg)_/_0.1)] select-none",
           !isMaximized ? "cursor-grab active:cursor-grabbing" : ""
         )}
         onPointerDown={(e) => {
@@ -93,8 +93,8 @@ export function MacWindow({
             onClick={onClose}
             onPointerDown={(e) => e.stopPropagation()}
             className={cn(
-              "w-3.5 h-3.5 rounded-full flex items-center justify-center border border-black/20 transition-colors",
-              isFocused ? "bg-[#ff5f56] hover:bg-[#ff5f56]/80" : "bg-white/25"
+              "w-3.5 h-3.5 rounded-full flex items-center justify-center border border-[color:var(--win-border)] transition-colors",
+              isFocused ? "bg-[#ff5f56] hover:bg-[#ff5f56]/80" : "bg-[color:rgb(var(--win-fg)_/_0.25)]"
             )}
             aria-label="Close window"
           >
@@ -104,8 +104,8 @@ export function MacWindow({
             onClick={onMinimize ?? onClose}
             onPointerDown={(e) => e.stopPropagation()}
             className={cn(
-              "w-3.5 h-3.5 rounded-full flex items-center justify-center border border-black/20 transition-colors",
-              isFocused ? "bg-[#ffbd2e] hover:bg-[#ffbd2e]/80" : "bg-white/25"
+              "w-3.5 h-3.5 rounded-full flex items-center justify-center border border-[color:var(--win-border)] transition-colors",
+              isFocused ? "bg-[#ffbd2e] hover:bg-[#ffbd2e]/80" : "bg-[color:rgb(var(--win-fg)_/_0.25)]"
             )}
             aria-label="Minimize window"
           >
@@ -115,8 +115,8 @@ export function MacWindow({
             onClick={() => setIsMaximized(!isMaximized)}
             onPointerDown={(e) => e.stopPropagation()}
             className={cn(
-              "w-3.5 h-3.5 rounded-full flex items-center justify-center border border-black/20 transition-colors",
-              isFocused ? "bg-[#27c93f] hover:bg-[#27c93f]/80" : "bg-white/25"
+              "w-3.5 h-3.5 rounded-full flex items-center justify-center border border-[color:var(--win-border)] transition-colors",
+              isFocused ? "bg-[#27c93f] hover:bg-[#27c93f]/80" : "bg-[color:rgb(var(--win-fg)_/_0.25)]"
             )}
             aria-label="Maximize window"
           >

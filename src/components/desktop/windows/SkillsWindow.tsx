@@ -39,14 +39,14 @@ export function SkillsWindow({ data }: { data: PortfolioData }) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: catIndex * 0.1, duration: 0.4 }}
-              className="flex flex-col bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.05] hover:border-white/20 transition-all shadow-lg"
+              className="flex flex-col bg-[color:rgb(var(--win-fg)_/_0.03)] border border-[color:rgb(var(--win-fg)_/_0.1)] rounded-2xl p-6 hover:bg-[color:rgb(var(--win-fg)_/_0.05)] hover:border-[color:rgb(var(--win-fg)_/_0.2)] transition-all shadow-lg"
             >
               {/* Category Header */}
-              <div className="flex items-center gap-4 mb-6 pb-4 border-b border-white/10">
-                <div className="w-10 h-10 rounded-[26%] flex items-center justify-center border border-white/25 bg-white/[0.04] text-white/90">
+              <div className="flex items-center gap-4 mb-6 pb-4 border-b border-[color:rgb(var(--win-fg)_/_0.1)]">
+                <div className="w-10 h-10 rounded-[26%] flex items-center justify-center border border-[color:rgb(var(--win-fg)_/_0.25)] bg-[color:rgb(var(--win-fg)_/_0.04)] text-[color:rgb(var(--win-fg)_/_0.9)]">
                   {getCategoryIcon(cat)}
                 </div>
-                <h3 className="text-xl font-bold text-white/90 tracking-wide">
+                <h3 className="text-xl font-bold text-[color:rgb(var(--win-fg)_/_0.9)] tracking-wide">
                   {cat}
                 </h3>
               </div>
@@ -59,10 +59,10 @@ export function SkillsWindow({ data }: { data: PortfolioData }) {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: (catIndex * 0.1) + (index * 0.05) + 0.2 }}
-                    className="px-4 py-2 rounded-full border bg-white/5 border-white/10 flex items-center gap-2 hover:bg-white/10 transition-colors cursor-default shadow-sm"
+                    className="px-4 py-2 rounded-full border bg-[color:rgb(var(--win-fg)_/_0.05)] border-[color:rgb(var(--win-fg)_/_0.1)] flex items-center gap-2 hover:bg-[color:rgb(var(--win-fg)_/_0.1)] transition-colors cursor-default shadow-sm"
                   >
-                    <div className="w-1.5 h-1.5 rounded-full bg-white/45" />
-                    <span className="text-sm font-medium text-white/90">{skill.name}</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-[color:rgb(var(--win-fg)_/_0.45)]" />
+                    <span className="text-sm font-medium text-[color:rgb(var(--win-fg)_/_0.9)]">{skill.name}</span>
                   </motion.div>
                 ))}
               </div>

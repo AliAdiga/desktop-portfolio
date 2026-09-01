@@ -31,11 +31,11 @@ const VideoPage = React.forwardRef<HTMLDivElement, { video: VideoItem; active: b
     return (
       <div
         ref={ref}
-        className="relative w-full h-full bg-[#0b0d10] border border-white/10 border-l-0 overflow-hidden"
+        className="relative w-full h-full bg-[var(--win-page-to)] border border-[color:rgb(var(--win-fg)_/_0.1)] border-l-0 overflow-hidden"
       >
         {errored ? (
           <div className="absolute inset-0 flex items-center justify-center">
-            <p className="text-white/40 text-xs px-6 text-center">{video.title} — video file not found</p>
+            <p className="text-[color:rgb(var(--win-fg)_/_0.4)] text-xs px-6 text-center">{video.title} — video file not found</p>
           </div>
         ) : (
           <video
@@ -66,12 +66,12 @@ const DetailPage = React.forwardRef<HTMLDivElement, { video: VideoItem }>(({ vid
   return (
     <div
       ref={ref}
-      className="relative w-full h-full flex flex-col justify-center px-8 py-10 bg-gradient-to-br from-[#1e2129] to-[#0e1013] border border-white/10 border-r-0 overflow-hidden"
+      className="relative w-full h-full flex flex-col justify-center px-8 py-10 bg-gradient-to-br from-[var(--win-page-from)] to-[var(--win-page-to)] border border-[color:rgb(var(--win-fg)_/_0.1)] border-r-0 overflow-hidden"
     >
-      {video.meta && <p className="text-white/35 text-[11px] uppercase tracking-wide mb-3">{video.meta}</p>}
-      <h3 className="text-white text-xl font-bold mb-4 leading-snug">{video.title}</h3>
+      {video.meta && <p className="text-[color:rgb(var(--win-fg)_/_0.35)] text-[11px] uppercase tracking-wide mb-3">{video.meta}</p>}
+      <h3 className="text-[color:rgb(var(--win-fg))] text-xl font-bold mb-4 leading-snug">{video.title}</h3>
       {video.description && (
-        <p className="text-white/55 text-sm leading-relaxed max-w-[38ch]">{video.description}</p>
+        <p className="text-[color:rgb(var(--win-fg)_/_0.55)] text-sm leading-relaxed max-w-[38ch]">{video.description}</p>
       )}
       <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black/40 to-transparent" />
     </div>
@@ -86,21 +86,21 @@ const OutroPage = React.forwardRef<HTMLDivElement, { profile: Profile }>(({ prof
   return (
     <div
       ref={ref}
-      className="relative w-full h-full flex flex-col justify-center px-8 py-10 bg-gradient-to-br from-[#1e2129] to-[#0e1013] border border-white/10 border-r-0 overflow-hidden"
+      className="relative w-full h-full flex flex-col justify-center px-8 py-10 bg-gradient-to-br from-[var(--win-page-from)] to-[var(--win-page-to)] border border-[color:rgb(var(--win-fg)_/_0.1)] border-r-0 overflow-hidden"
     >
-      <p className="text-white/35 text-[11px] uppercase tracking-wide mb-3">End of reel</p>
-      <h3 className="text-white text-xl font-bold mb-4 leading-snug">Let&apos;s work together</h3>
-      <p className="text-white/55 text-sm leading-relaxed max-w-[38ch] mb-6">
+      <p className="text-[color:rgb(var(--win-fg)_/_0.35)] text-[11px] uppercase tracking-wide mb-3">End of reel</p>
+      <h3 className="text-[color:rgb(var(--win-fg))] text-xl font-bold mb-4 leading-snug">Let&apos;s work together</h3>
+      <p className="text-[color:rgb(var(--win-fg)_/_0.55)] text-sm leading-relaxed max-w-[38ch] mb-6">
         Got a project in mind? Happy to talk it through — no pitch deck required.
       </p>
       <div className="flex flex-col gap-1.5 text-sm">
         {profile.email && (
-          <a href={`mailto:${profile.email}`} className="text-white/80 hover:text-white transition-colors">
+          <a href={`mailto:${profile.email}`} className="text-[color:rgb(var(--win-fg)_/_0.8)] hover:text-[color:rgb(var(--win-fg))] transition-colors">
             {profile.email}
           </a>
         )}
         {profile.phone && (
-          <a href={`tel:${profile.phone.replace(/\s+/g, "")}`} className="text-white/80 hover:text-white transition-colors">
+          <a href={`tel:${profile.phone.replace(/\s+/g, "")}`} className="text-[color:rgb(var(--win-fg)_/_0.8)] hover:text-[color:rgb(var(--win-fg))] transition-colors">
             {profile.phone}
           </a>
         )}
@@ -127,14 +127,14 @@ const BackCoverPage = React.forwardRef<HTMLDivElement, { profile: Profile }>(({ 
   return (
     <div
       ref={ref}
-      className="relative w-full h-full flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-[#15181e] to-[#08090c] border border-white/10 border-l-0 overflow-hidden"
+      className="relative w-full h-full flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-[var(--win-page-from)] to-[var(--win-page-to)] border border-[color:rgb(var(--win-fg)_/_0.1)] border-l-0 overflow-hidden"
     >
-      <div className="w-14 h-14 rounded-full border border-white/15 flex items-center justify-center">
-        <span className="text-white/70 text-lg font-semibold tracking-wide">{initials || "—"}</span>
+      <div className="w-14 h-14 rounded-full border border-[color:rgb(var(--win-fg)_/_0.15)] flex items-center justify-center">
+        <span className="text-[color:rgb(var(--win-fg)_/_0.7)] text-lg font-semibold tracking-wide">{initials || "—"}</span>
       </div>
       <div className="text-center">
-        <p className="text-white/70 text-sm font-medium">{profile.name}</p>
-        {profile.role && <p className="text-white/30 text-[11px] mt-0.5">{profile.role}</p>}
+        <p className="text-[color:rgb(var(--win-fg)_/_0.7)] text-sm font-medium">{profile.name}</p>
+        {profile.role && <p className="text-[color:rgb(var(--win-fg)_/_0.3)] text-[11px] mt-0.5">{profile.role}</p>}
       </div>
       <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-black/40 to-transparent" />
     </div>
@@ -176,16 +176,16 @@ export function VideosWindow({ data }: { data: PortfolioData }) {
   }, []);
 
   return (
-    <div className="flex flex-col h-[calc(100%+3rem)] bg-[#161616] -m-6 rounded-b-xl overflow-hidden font-sans relative">
+    <div className="flex flex-col h-[calc(100%+3rem)] bg-[var(--win-bg)] -m-6 rounded-b-xl overflow-hidden font-sans relative">
       {/* Toolbar */}
-      <div className="bg-[#2d2d2d]/90 backdrop-blur-md px-4 py-2 border-b border-black/20 shrink-0 sticky top-0 z-10 flex items-center justify-between">
-        <h2 className="text-white font-bold text-sm">Demos</h2>
-        <span className="text-white/50 text-xs">{videos.length} items</span>
+      <div className="bg-[var(--win-toolbar)] backdrop-blur-md px-4 py-2 border-b border-[color:var(--win-border)] shrink-0 sticky top-0 z-10 flex items-center justify-between">
+        <h2 className="text-[color:rgb(var(--win-fg))] font-bold text-sm">Demos</h2>
+        <span className="text-[color:rgb(var(--win-fg)_/_0.5)] text-xs">{videos.length} items</span>
       </div>
 
       {videos.length === 0 ? (
         <div className="flex-1 flex items-center justify-center">
-          <p className="text-white/40 text-sm">No videos yet.</p>
+          <p className="text-[color:rgb(var(--win-fg)_/_0.4)] text-sm">No videos yet.</p>
         </div>
       ) : (
         <>
@@ -233,22 +233,22 @@ export function VideosWindow({ data }: { data: PortfolioData }) {
           </div>
 
           {/* Nav */}
-          <div className="flex items-center justify-center gap-5 py-3 bg-[#1a1a1a] shrink-0 border-t border-black/20">
+          <div className="flex items-center justify-center gap-5 py-3 bg-[var(--win-bg-alt)] shrink-0 border-t border-[color:var(--win-border)]">
             <button
               type="button"
-              className="w-8 h-8 rounded-full bg-white/6 hover:bg-white/14 disabled:opacity-30 disabled:hover:bg-white/6 flex items-center justify-center text-white transition-colors"
+              className="w-8 h-8 rounded-full bg-[color:rgb(var(--win-fg)_/_0.06)] hover:bg-[color:rgb(var(--win-fg)_/_0.14)] disabled:opacity-30 disabled:hover:bg-[color:rgb(var(--win-fg)_/_0.06)] flex items-center justify-center text-[color:rgb(var(--win-fg))] transition-colors"
               disabled={activeIndex === 0}
               onClick={() => flipTo(activeIndex - 1)}
               aria-label="Previous page"
             >
               <ChevronLeft size={15} />
             </button>
-            <span className="text-white/40 text-xs tabular-nums">
+            <span className="text-[color:rgb(var(--win-fg)_/_0.4)] text-xs tabular-nums">
               {onClosingSpread ? "End" : `${activeIndex + 1} / ${videos.length}`}
             </span>
             <button
               type="button"
-              className="w-8 h-8 rounded-full bg-white/6 hover:bg-white/14 disabled:opacity-30 disabled:hover:bg-white/6 flex items-center justify-center text-white transition-colors"
+              className="w-8 h-8 rounded-full bg-[color:rgb(var(--win-fg)_/_0.06)] hover:bg-[color:rgb(var(--win-fg)_/_0.14)] disabled:opacity-30 disabled:hover:bg-[color:rgb(var(--win-fg)_/_0.06)] flex items-center justify-center text-[color:rgb(var(--win-fg))] transition-colors"
               disabled={activeIndex >= lastSpread}
               onClick={() => flipTo(activeIndex + 1)}
               aria-label="Next page"
