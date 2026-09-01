@@ -100,7 +100,7 @@ const OutroPage = React.forwardRef<HTMLDivElement, { profile: Profile }>(({ prof
           </a>
         )}
         {profile.phone && (
-          <a href={`tel:${profile.phone}`} className="text-white/80 hover:text-white transition-colors">
+          <a href={`tel:${profile.phone.replace(/\s+/g, "")}`} className="text-white/80 hover:text-white transition-colors">
             {profile.phone}
           </a>
         )}
