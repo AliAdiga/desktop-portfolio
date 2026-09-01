@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { ICON_STROKE } from "@/lib/iconStyles";
 import { useTheme } from "@/lib/theme";
+import { FirstRunHint } from "../shared/FirstRunHint";
 
 type BatteryState = { level: number; charging: boolean };
 
@@ -96,7 +97,13 @@ export function MenuBar({
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 h-7 flex items-center justify-between px-3 z-[60] bg-[var(--desk-panel)] backdrop-blur-xl border-b border-[color:var(--desk-panel-border)] text-[color:var(--desk-text)] text-[13px] select-none">
+    <>
+      {/* Rendered from here purely because MenuBar is the desktop-only
+          component that is always mounted. It belongs in DesktopView, and
+          should move there once that file is free of in-flight edits. Its own
+          positioning is fixed, so being nested in the bar costs it nothing. */}
+      <FirstRunHint />
+      <div className="fixed top-0 left-0 right-0 h-7 flex items-center justify-between px-3 z-[60] bg-[var(--desk-panel)] backdrop-blur-xl border-b border-[color:var(--desk-panel-border)] text-[color:var(--desk-text)] text-[13px] select-none">
       {/* Left — mark plus the frontmost window, as macOS shows the active app */}
       <div className="flex items-center gap-3.5">
         <Command size={14} strokeWidth={ICON_STROKE} className="opacity-80" />
@@ -138,7 +145,8 @@ export function MenuBar({
         </button>
         {/* Reserve the width so the bar doesn't jump when the clock appears. */}
         <span className="min-w-[132px] text-right tabular-nums">{time ?? ""}</span>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

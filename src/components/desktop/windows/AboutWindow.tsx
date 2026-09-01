@@ -9,6 +9,7 @@ type SectionId = "intro" | "offer" | "awards" | "clients";
 
 export function AboutWindow({ data }: { data: PortfolioData }) {
   const { profile, socialLinks, about } = data;
+  const testimonials = data.testimonials ?? [];
   const offerings = about?.offerings || [];
   const awards = about?.awards || [];
   const clients = about?.clients || [];
@@ -113,6 +114,31 @@ export function AboutWindow({ data }: { data: PortfolioData }) {
               <div className="mb-6">
                 <h2 className="font-semibold text-sm mb-1.5">My Approach</h2>
                 <p className="text-[color:rgb(var(--win-fg)_/_0.6)] text-sm leading-relaxed">{about.approach}</p>
+              </div>
+            )}
+
+            {/* Appears by itself once src/data/testimonials.ts has entries, and
+                is absent until then — an empty "what clients say" heading reads
+                worse than no section at all. */}
+            {testimonials.length > 0 && (
+              <div className="mb-6">
+                <h2 className="font-semibold text-sm mb-2.5">What clients say</h2>
+                <div className="flex flex-col gap-3">
+                  {testimonials.map((t) => (
+                    <figure
+                      key={t.id}
+                      className="border-l-2 border-[color:rgb(var(--win-fg)_/_0.2)] pl-3.5"
+                    >
+                      <blockquote className="text-[color:rgb(var(--win-fg)_/_0.7)] text-sm leading-relaxed">
+                        &ldquo;{t.quote}&rdquo;
+                      </blockquote>
+                      <figcaption className="text-[color:rgb(var(--win-fg)_/_0.45)] text-xs mt-1.5">
+                        {t.author}
+                        {t.role && <span className="opacity-70"> — {t.role}</span>}
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
               </div>
             )}
 

@@ -1,5 +1,6 @@
 import { PortfolioData } from "../types/portfolio";
 import { profile, socialLinks } from "./profile";
+import { testimonials } from "./testimonials";
 import { skills } from "./skills";
 import { projects } from "./projects";
 import { experience } from "./experience";
@@ -13,6 +14,7 @@ import { aboutContent } from "./about";
 export const portfolioData: PortfolioData = {
   profile,
   socialLinks,
+  testimonials,
   skills,
   projects,
   experience,

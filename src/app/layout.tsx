@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { profile } from "@/data/profile";
 import "./globals.css";
 import "./theme.css";
@@ -120,6 +121,10 @@ export default function RootLayout({
           broken page. */}
       <body className="min-h-full flex flex-col overflow-hidden bg-[var(--background)] text-[color:var(--desk-text-strong)]">
         {children}
+        {/* Cookieless page analytics, so it's clear which projects visitors
+            actually open rather than guessing. Inert unless the deployment is
+            on Vercel with Analytics enabled in the project settings. */}
+        <Analytics />
       </body>
     </html>
   );

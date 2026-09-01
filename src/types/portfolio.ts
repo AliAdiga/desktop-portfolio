@@ -63,6 +63,17 @@ export interface Note {
   pinned?: boolean;
 }
 
+export interface Testimonial {
+  id: string;
+  /** One or two sentences. Longer than that and nobody reads it. */
+  quote: string;
+  author: string;
+  /** Their role and company, e.g. "Owner, Zaytoun". */
+  role?: string;
+  /** Links the quote to an entry in src/data/projects.ts. */
+  projectId?: string;
+}
+
 export interface Photo {
   id: string;
   url: string;
@@ -128,6 +139,7 @@ export interface PortfolioData {
   projects: Project[];
   experience: Experience[];
   socialLinks: SocialLink[];
+  testimonials?: Testimonial[];
   playlist?: Song[];
   notes?: Note[];
   photos?: Photo[];
