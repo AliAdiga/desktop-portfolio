@@ -46,7 +46,7 @@ export function AboutWindow({ data }: { data: PortfolioData }) {
           ))}
         </nav>
 
-        {(profile.email || profile.phone) && (
+        {(profile.email || profile.phone || profile.resumeUrl) && (
           <>
             <p className="text-[11px] font-semibold text-[color:rgb(var(--win-fg)_/_0.35)] uppercase tracking-wide px-2.5 mb-1.5">Contact</p>
             <nav className="flex flex-col gap-0.5">
@@ -64,6 +64,18 @@ export function AboutWindow({ data }: { data: PortfolioData }) {
                   className="text-left text-[13px] px-2.5 py-1.5 rounded-md text-[color:rgb(var(--win-fg)_/_0.6)] hover:bg-[color:rgb(var(--win-fg)_/_0.1)]"
                 >
                   Call me
+                </a>
+              )}
+              {/* Only rendered once resumeUrl points at a real file, so the
+                  action can never be a 404. */}
+              {profile.resumeUrl && (
+                <a
+                  href={profile.resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-left text-[13px] px-2.5 py-1.5 rounded-md text-[color:rgb(var(--win-fg)_/_0.6)] hover:bg-[color:rgb(var(--win-fg)_/_0.1)]"
+                >
+                  Download CV
                 </a>
               )}
             </nav>

@@ -64,6 +64,10 @@ export const workspaceRoot: FolderItem = {
         { id: "dock-experience", name: "Experience", kind: "app", appId: "experience" },
         { id: "dock-photos", name: "Photos", kind: "app", appId: "photos" },
         { id: "dock-terminal", name: "Terminal", kind: "app", appId: "terminal" },
+        // Social links become apps automatically (src/data/socialApps.ts),
+        // but the dock is this list — an app is only visible if it is here.
+        // The id is always `social-<platform lowercased>`.
+        { id: "dock-github", name: "GitHub", kind: "app", appId: "social-github" },
       ],
     },
   ],

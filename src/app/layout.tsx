@@ -8,9 +8,21 @@ import "./theme.css";
 // share cards, and search listings all follow automatically.
 const siteTitle = profile.role ? `${profile.name} — ${profile.role}` : profile.name;
 
-// Set NEXT_PUBLIC_SITE_URL to the real domain before going live. It's what
-// relative OpenGraph/Twitter image paths get resolved against.
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+/**
+ * What relative OpenGraph/Twitter image paths resolve against.
+ *
+ * Falling back to localhost meant every shared link pointed its preview image
+ * at a machine the reader doesn't have, so the card rendered bare — which is
+ * exactly when it matters, since sending the link is how this site gets seen.
+ *
+ * Vercel injects VERCEL_PROJECT_PRODUCTION_URL on every deployment, so the
+ * production domain is correct with no configuration at all. Set
+ * NEXT_PUBLIC_SITE_URL only to override it — a custom domain, most likely.
+ */
+const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (vercelUrl ? `https://${vercelUrl}` : "http://localhost:3000");
 
 export const metadata: Metadata = {
   title: {
@@ -22,10 +34,13 @@ export const metadata: Metadata = {
     profile.name,
     profile.role,
     "portfolio",
-    "photography",
-    "videography",
-    "creative direction",
-    "design",
+    "web developer",
+    "freelance developer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Amman",
+    "Jordan",
   ],
   authors: [{ name: profile.name }],
   creator: profile.name,
@@ -37,15 +52,13 @@ export const metadata: Metadata = {
     siteName: profile.name,
     title: siteTitle,
     description: profile.bio,
-    // Add a share image at public/og.jpg (1200x630 recommended), then
-    // uncomment to have it show when the site is linked anywhere.
-    // images: [{ url: "/og.jpg", width: 1200, height: 630, alt: siteTitle }],
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: siteTitle }],
   },
   twitter: {
     card: "summary_large_image",
     title: siteTitle,
     description: profile.bio,
-    // images: ["/og.jpg"],
+    images: ["/og.jpg"],
   },
   robots: {
     index: true,
