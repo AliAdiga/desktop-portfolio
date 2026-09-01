@@ -1,15 +1,21 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { PortfolioData, Photo } from "@/types/portfolio";
-import { Folder, ChevronLeft, X, ExternalLink } from "lucide-react";
+import { Folder, ChevronLeft, ChevronRight, X, ExternalLink } from "lucide-react";
 import { ICON_FRAME, ICON_FRAME_INTERACTIVE, ICON_STROKE } from "@/lib/iconStyles";
 import { cn } from "@/lib/utils";
 
 type Album = { name: string; url?: string; photos: Photo[] };
 
-/** Group photos into albums, preserving the order they're declared in. */
+/**
+ * Group photos into albums, preserving declaration order.
+ *
+ * That order is load-bearing: each album is written as a sequence — origin,
+ * then craft, then the ask — so it reads front to back rather than as a pile
+ * of screenshots. Reordering src/data/photos.ts reorders the story.
+ */
 function toAlbums(photos: Photo[]): Album[] {
   const order: string[] = [];
   const byName = new Map<string, Album>();
@@ -27,9 +33,31 @@ function toAlbums(photos: Photo[]): Album[] {
 export function PhotosWindow({ data }: { data: PortfolioData }) {
   const albums = useMemo(() => toAlbums(data.photos ?? []), [data.photos]);
   const [openAlbum, setOpenAlbum] = useState<string | null>(null);
-  const [lightbox, setLightbox] = useState<Photo | null>(null);
+  // An index, not the photo itself — otherwise there is no "next" to go to and
+  // the only way out of a page is back to the grid.
+  const [index, setIndex] = useState<number | null>(null);
 
   const album = albums.find((a) => a.name === openAlbum) ?? null;
+  const photos = album?.photos ?? [];
+  const current = index === null ? null : (photos[index] ?? null);
+
+  const close = useCallback(() => setIndex(null), []);
+  const step = useCallback(
+    (delta: number) =>
+      setIndex((i) => (i === null ? i : Math.max(0, Math.min(photos.length - 1, i + delta)))),
+    [photos.length]
+  );
+
+  useEffect(() => {
+    if (index === null) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowRight") step(1);
+      if (e.key === "ArrowLeft") step(-1);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [index, close, step]);
 
   return (
     <div className="flex flex-col h-[calc(100%+3rem)] bg-[#161616] -m-6 rounded-b-xl overflow-hidden font-sans text-white select-none">
@@ -39,7 +67,10 @@ export function PhotosWindow({ data }: { data: PortfolioData }) {
           {album && (
             <button
               type="button"
-              onClick={() => setOpenAlbum(null)}
+              onClick={() => {
+                setOpenAlbum(null);
+                setIndex(null);
+              }}
               className="flex items-center gap-0.5 text-white/60 hover:text-white transition-colors -ml-1"
               aria-label="Back to albums"
             >
@@ -111,49 +142,104 @@ export function PhotosWindow({ data }: { data: PortfolioData }) {
             ))}
           </div>
         ) : (
-          /* ---- Inside an album ---- */
+          /* ---- Inside an album: the contents page ---- */
           <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
-            {album.photos.map((p) => (
+            {album.photos.map((p, i) => (
               <button
                 key={p.id}
                 type="button"
-                onClick={() => setLightbox(p)}
+                onClick={() => setIndex(i)}
                 className="group flex flex-col gap-1.5 text-left outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded-lg"
               >
                 <div className="relative aspect-[16/10] rounded-lg overflow-hidden border border-white/10 group-hover:border-white/30 transition-colors">
-                  <Image src={p.url} alt={p.caption} fill sizes="320px" className="object-cover" />
+                  <Image
+                    src={p.url}
+                    alt={p.title ?? p.caption}
+                    fill
+                    sizes="320px"
+                    className="object-cover"
+                  />
+                  {/* The album is an ordered sequence, so the number says where
+                      you are in it — not merely which tile this is. */}
+                  <span className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-md text-[10px] tabular-nums text-white/70">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                 </div>
-                <p className="text-white/55 text-[11px] leading-snug line-clamp-2">{p.caption}</p>
+                <div>
+                  {p.title && <p className="text-[12px] font-medium leading-tight">{p.title}</p>}
+                  <p className="text-white/45 text-[11px] leading-snug line-clamp-2 mt-0.5">
+                    {p.caption}
+                  </p>
+                </div>
               </button>
             ))}
           </div>
         )}
       </div>
 
-      {/* Lightbox */}
-      {lightbox && (
+      {/* ---- Reader: one page at a time, turned with the arrows or the keyboard ---- */}
+      {current && index !== null && (
         <div
-          className="absolute inset-0 z-50 bg-black/85 backdrop-blur-sm flex flex-col items-center justify-center p-6 gap-3"
-          onClick={() => setLightbox(null)}
+          className="absolute inset-0 z-50 bg-black/90 backdrop-blur-sm flex flex-col p-6 gap-4"
+          onClick={close}
         >
           <button
             type="button"
-            onClick={() => setLightbox(null)}
-            className="absolute top-3 right-3 text-white/60 hover:text-white transition-colors"
+            onClick={close}
+            className="absolute top-3 right-3 z-10 text-white/60 hover:text-white transition-colors"
             aria-label="Close"
           >
             <X size={18} strokeWidth={ICON_STROKE} />
           </button>
-          <div className="relative w-full max-w-4xl aspect-[16/10]">
+
+          {/* A flexible box, not a fixed ratio: these pages range from square to
+              1:2, and a fixed frame letterboxes the tall ones into a sliver. */}
+          <div className="relative flex-1 w-full max-w-5xl mx-auto min-h-0">
             <Image
-              src={lightbox.url}
-              alt={lightbox.caption}
+              src={current.url}
+              alt={current.title ?? current.caption}
               fill
               sizes="90vw"
               className="object-contain"
             />
           </div>
-          <p className="text-white/70 text-xs text-center max-w-xl">{lightbox.caption}</p>
+
+          <div className="shrink-0 text-center" onClick={(e) => e.stopPropagation()}>
+            <p className="text-white/35 text-[11px] tabular-nums">
+              {index + 1} / {photos.length}
+            </p>
+            {current.title && (
+              <p className="text-white text-sm font-medium mt-1">{current.title}</p>
+            )}
+            <p className="text-white/60 text-xs max-w-xl mx-auto mt-0.5">{current.caption}</p>
+          </div>
+
+          {/* Page turns sit beside the image rather than over it, and stop the
+              click from reaching the backdrop's close handler. */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              step(-1);
+            }}
+            disabled={index === 0}
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/8 hover:bg-white/16 disabled:opacity-25 disabled:hover:bg-white/8 flex items-center justify-center transition-colors"
+            aria-label="Previous photo"
+          >
+            <ChevronLeft size={17} strokeWidth={ICON_STROKE} />
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              step(1);
+            }}
+            disabled={index === photos.length - 1}
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/8 hover:bg-white/16 disabled:opacity-25 disabled:hover:bg-white/8 flex items-center justify-center transition-colors"
+            aria-label="Next photo"
+          >
+            <ChevronRight size={17} strokeWidth={ICON_STROKE} />
+          </button>
         </div>
       )}
     </div>

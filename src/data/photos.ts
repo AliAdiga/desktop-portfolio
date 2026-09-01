@@ -12,7 +12,8 @@ export const photos: Photo[] = [
   {
     id: "zaytoun-origin",
     url: "/photos/zaytoun-origin.jpg",
-    caption: "Origin story — the family kitchen in Jabal Al-Weibdeh.",
+    title: "Origin",
+    caption: "A family kitchen in Jabal Al-Weibdeh.",
     date: "2026",
     album: "Zaytoun",
     albumUrl: "https://zaytoun-restaurant.vercel.app/",
@@ -20,7 +21,8 @@ export const photos: Photo[] = [
   {
     id: "zaytoun-kitchen",
     url: "/photos/zaytoun-kitchen.jpg",
-    caption: "Positioning card — 120 covers, cooked like a home kitchen.",
+    title: "The promise",
+    caption: "120 covers, still cooked like home.",
     date: "2026",
     album: "Zaytoun",
     albumUrl: "https://zaytoun-restaurant.vercel.app/",
@@ -28,7 +30,8 @@ export const photos: Photo[] = [
   {
     id: "zaytoun-love",
     url: "/photos/zaytoun-love.jpg",
-    caption: "Campaign key art, on the same serif and olive palette as the site.",
+    title: "Key art",
+    caption: "The site's serif and olive, in campaign form.",
     date: "2026",
     album: "Zaytoun",
     albumUrl: "https://zaytoun-restaurant.vercel.app/",
@@ -36,7 +39,8 @@ export const photos: Photo[] = [
   {
     id: "zaytoun-ingredients",
     url: "/photos/zaytoun-ingredients.jpg",
-    caption: "Sourcing message for the social grid.",
+    title: "Sourcing",
+    caption: "Source the best, then get out of its way.",
     date: "2026",
     album: "Zaytoun",
     albumUrl: "https://zaytoun-restaurant.vercel.app/",
@@ -44,7 +48,8 @@ export const photos: Photo[] = [
   {
     id: "zaytoun-ouzi",
     url: "/photos/zaytoun-ouzi.jpg",
-    caption: "Signature dish card — Lamb Ouzi, priced as on the menu.",
+    title: "The dish",
+    caption: "Lamb Ouzi, priced as on the menu.",
     date: "2026",
     album: "Zaytoun",
     albumUrl: "https://zaytoun-restaurant.vercel.app/",
@@ -52,7 +57,8 @@ export const photos: Photo[] = [
   {
     id: "zaytoun-reserve",
     url: "/photos/zaytoun-reserve.jpg",
-    caption: "Reservations call to action.",
+    title: "The ask",
+    caption: "One button: reserve a table.",
     date: "2026",
     album: "Zaytoun",
     albumUrl: "https://zaytoun-restaurant.vercel.app/",
@@ -62,7 +68,8 @@ export const photos: Photo[] = [
   {
     id: "vestra-homepage",
     url: "/photos/vestra-homepage.jpg",
-    caption: "Home — hero, proof points and the best-sellers row.",
+    title: "The shopfront",
+    caption: "Solid gold, nothing plated.",
     date: "2026",
     album: "Vestra",
     albumUrl: "https://vestra-eta.vercel.app/",
@@ -70,7 +77,8 @@ export const photos: Photo[] = [
   {
     id: "vestra-catalogue",
     url: "/photos/vestra-catalogue.jpg",
-    caption: "All jewellery — 14 pieces, filterable by category.",
+    title: "The catalogue",
+    caption: "Fourteen pieces, each made to order.",
     date: "2026",
     album: "Vestra",
     albumUrl: "https://vestra-eta.vercel.app/",
@@ -78,7 +86,8 @@ export const photos: Photo[] = [
   {
     id: "vestra-rings",
     url: "/photos/vestra-rings.jpg",
-    caption: "Rings — signets, bands and solitaires.",
+    title: "Rings",
+    caption: "Signets, bands and solitaires.",
     date: "2026",
     album: "Vestra",
     albumUrl: "https://vestra-eta.vercel.app/",
@@ -86,7 +95,8 @@ export const photos: Photo[] = [
   {
     id: "vestra-chains",
     url: "/photos/vestra-chains.jpg",
-    caption: "Chains — hand-closed links with no visible joins.",
+    title: "Chains",
+    caption: "Hand-closed links, no visible joins.",
     date: "2026",
     album: "Vestra",
     albumUrl: "https://vestra-eta.vercel.app/",
@@ -94,7 +104,8 @@ export const photos: Photo[] = [
   {
     id: "vestra-pendants",
     url: "/photos/vestra-pendants.jpg",
-    caption: "Pendants — weighted to swing, not to sit.",
+    title: "Pendants",
+    caption: "Weighted to swing, not to sit.",
     date: "2026",
     album: "Vestra",
     albumUrl: "https://vestra-eta.vercel.app/",
@@ -102,7 +113,8 @@ export const photos: Photo[] = [
   {
     id: "vestra-earrings",
     url: "/photos/vestra-earrings.jpg",
-    caption: "Earrings — studs, hoops and drops in recycled gold.",
+    title: "Earrings",
+    caption: "Studs, hoops and drops.",
     date: "2026",
     album: "Vestra",
     albumUrl: "https://vestra-eta.vercel.app/",
@@ -110,7 +122,8 @@ export const photos: Photo[] = [
   {
     id: "vestra-cuffs",
     url: "/photos/vestra-cuffs.jpg",
-    caption: "Cuffs — forged from a single billet.",
+    title: "Cuffs",
+    caption: "Forged from a single billet.",
     date: "2026",
     album: "Vestra",
     albumUrl: "https://vestra-eta.vercel.app/",
@@ -118,7 +131,8 @@ export const photos: Photo[] = [
   {
     id: "vestra-about",
     url: "/photos/vestra-about.jpg",
-    caption: "About — the bespoke process, consultation to delivery.",
+    title: "The bench",
+    caption: "We meet, we draw, you approve, we make.",
     date: "2026",
     album: "Vestra",
     albumUrl: "https://vestra-eta.vercel.app/",
@@ -126,7 +140,8 @@ export const photos: Photo[] = [
   {
     id: "vestra-shipping",
     url: "/photos/vestra-shipping.jpg",
-    caption: "Shipping — UK and international rates, duties and insurance.",
+    title: "Delivery",
+    caption: "Insured, tracked, plastic-free.",
     date: "2026",
     album: "Vestra",
     albumUrl: "https://vestra-eta.vercel.app/",
@@ -134,7 +149,8 @@ export const photos: Photo[] = [
   {
     id: "vestra-care",
     url: "/photos/vestra-care.jpg",
-    caption: "Care & repair — cleaning, storage and lifetime servicing.",
+    title: "Aftercare",
+    caption: "Servicing is free, for life.",
     date: "2026",
     album: "Vestra",
     albumUrl: "https://vestra-eta.vercel.app/",
@@ -142,7 +158,8 @@ export const photos: Photo[] = [
   {
     id: "vestra-contact",
     url: "/photos/vestra-contact.jpg",
-    caption: "Contact — enquiry form and studio details.",
+    title: "The studio",
+    caption: "Answered by someone who makes the pieces.",
     date: "2026",
     album: "Vestra",
     albumUrl: "https://vestra-eta.vercel.app/",
@@ -152,7 +169,8 @@ export const photos: Photo[] = [
   {
     id: "cedar-home",
     url: "/photos/cedar-home.jpg",
-    caption: "Hero, with practice statistics.",
+    title: "The firm",
+    caption: "Practice record, stated up front.",
     date: "2026",
     album: "Cedar Stone Legal",
     albumUrl: "https://cedar-stone-legal.vercel.app/",
@@ -160,7 +178,8 @@ export const photos: Photo[] = [
   {
     id: "cedar-team",
     url: "/photos/cedar-team.jpg",
-    caption: "Team profiles with practice area and years of experience.",
+    title: "The people",
+    caption: "Whose desk your case lands on.",
     date: "2026",
     album: "Cedar Stone Legal",
     albumUrl: "https://cedar-stone-legal.vercel.app/",
@@ -168,7 +187,8 @@ export const photos: Photo[] = [
   {
     id: "cedar-practice",
     url: "/photos/cedar-practice.jpg",
-    caption: "Practice areas — family, corporate, estate and litigation.",
+    title: "Practice areas",
+    caption: "Family, corporate, estate, litigation.",
     date: "2026",
     album: "Cedar Stone Legal",
     albumUrl: "https://cedar-stone-legal.vercel.app/",
@@ -178,7 +198,8 @@ export const photos: Photo[] = [
   {
     id: "evercare-treatments",
     url: "/photos/evercare-treatments.jpg",
-    caption: "Treatments & procedures — plain-language guides per specialty.",
+    title: "Procedures",
+    caption: "What it is, the day itself, recovery.",
     date: "2026",
     album: "Evercare",
     albumUrl: "https://evercare-hospital-blush.vercel.app/",
@@ -186,7 +207,8 @@ export const photos: Photo[] = [
   {
     id: "evercare-telehealth",
     url: "/photos/evercare-telehealth.jpg",
-    caption: "Virtual care — visit types, and when to come in instead.",
+    title: "Virtual care",
+    caption: "And when to come in instead.",
     date: "2026",
     album: "Evercare",
     albumUrl: "https://evercare-hospital-blush.vercel.app/",
@@ -194,7 +216,8 @@ export const photos: Photo[] = [
   {
     id: "evercare-library",
     url: "/photos/evercare-library.jpg",
-    caption: "Health library — symptom router and condition overviews.",
+    title: "Health library",
+    caption: "Symptoms in, department out.",
     date: "2026",
     album: "Evercare",
     albumUrl: "https://evercare-hospital-blush.vercel.app/",
@@ -202,7 +225,8 @@ export const photos: Photo[] = [
   {
     id: "evercare-visit",
     url: "/photos/evercare-visit.jpg",
-    caption: "Plan your visit — map, entrances, accessibility, visitor hours.",
+    title: "Getting there",
+    caption: "Parking, entrances, step-free access.",
     date: "2026",
     album: "Evercare",
     albumUrl: "https://evercare-hospital-blush.vercel.app/",
@@ -210,7 +234,8 @@ export const photos: Photo[] = [
   {
     id: "evercare-insurance",
     url: "/photos/evercare-insurance.jpg",
-    caption: "Insurance & pricing — coverage lookup and self-pay cost ranges.",
+    title: "What it costs",
+    caption: "Check cover before you arrive.",
     date: "2026",
     album: "Evercare",
     albumUrl: "https://evercare-hospital-blush.vercel.app/",
@@ -218,7 +243,8 @@ export const photos: Photo[] = [
   {
     id: "evercare-international",
     url: "/photos/evercare-international.jpg",
-    caption: "International patients — visa support and the four-step journey.",
+    title: "From abroad",
+    caption: "Visa, interpreter, one coordinator.",
     date: "2026",
     album: "Evercare",
     albumUrl: "https://evercare-hospital-blush.vercel.app/",
@@ -226,7 +252,8 @@ export const photos: Photo[] = [
   {
     id: "evercare-portal",
     url: "/photos/evercare-portal.jpg",
-    caption: "Patient portal — sign-in for results, prescriptions and messaging.",
+    title: "Patient portal",
+    caption: "Results, prescriptions, messages.",
     date: "2026",
     album: "Evercare",
     albumUrl: "https://evercare-hospital-blush.vercel.app/",
@@ -234,7 +261,8 @@ export const photos: Photo[] = [
   {
     id: "evercare-careers",
     url: "/photos/evercare-careers.jpg",
-    caption: "Careers — open positions, residencies and fellowships.",
+    title: "Working here",
+    caption: "Openings, residencies, fellowships.",
     date: "2026",
     album: "Evercare",
     albumUrl: "https://evercare-hospital-blush.vercel.app/",
@@ -242,7 +270,8 @@ export const photos: Photo[] = [
   {
     id: "evercare-blog",
     url: "/photos/evercare-blog.jpg",
-    caption: "Health blog — articles filtered by specialty, with bylines.",
+    title: "Health blog",
+    caption: "Written for patients, not doctors.",
     date: "2026",
     album: "Evercare",
     albumUrl: "https://evercare-hospital-blush.vercel.app/",

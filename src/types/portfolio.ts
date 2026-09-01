@@ -66,6 +66,12 @@ export interface Note {
 export interface Photo {
   id: string;
   url: string;
+  /**
+   * Short label for this page in the album's story — one or two words.
+   * Albums read as a sequence, so this is the chapter name, not a filename.
+   */
+  title?: string;
+  /** One line. The album is browsed, not read; keep it to a single thought. */
   caption: string;
   date: string;
   location?: string;
