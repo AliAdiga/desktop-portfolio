@@ -109,6 +109,10 @@ const staticApps: AppDefinition[] = [
     iconColor: "text-green-400",
     mobileColor: "bg-green-500",
     showOnDesktop: false,
+    // Off the mobile home screen too. It still holds the template's demo
+    // playlist and nothing links to it on the desktop, so surfacing it on
+    // mobile only offered a dead end.
+    showOnMobile: false,
     windowSize: { maxWidth: "max-w-3xl", height: "h-[600px]" },
   },
   {

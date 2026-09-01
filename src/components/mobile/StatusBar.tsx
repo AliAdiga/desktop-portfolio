@@ -24,7 +24,7 @@ export function StatusBar({ onSearchClick }: { onSearchClick?: () => void }) {
   }, []);
 
   return (
-    <div className="w-full flex items-center justify-between px-7 pt-[max(env(safe-area-inset-top,14px),14px)] pb-1 text-white font-semibold text-[13px] z-50 relative">
+    <div className="desk-icon-label w-full flex items-center justify-between px-7 pt-[max(env(safe-area-inset-top,14px),14px)] pb-1 font-semibold text-[13px] z-50 relative">
       <div className="w-[60px]">{time}</div>
 
       {/* Spacer for Dynamic Island */}

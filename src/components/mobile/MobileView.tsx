@@ -42,7 +42,7 @@ export function MobileView({ data, initialApp }: { data: PortfolioData; initialA
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="w-full bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl p-5 mb-8 shadow-xl flex items-center gap-4"
+          className="w-full bg-[var(--desk-panel-strong)] backdrop-blur-2xl border border-[color:var(--desk-panel-border)] rounded-3xl p-5 mb-8 shadow-xl flex items-center gap-4"
         >
           <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 p-[2px] shrink-0">
             <div className="relative w-full h-full rounded-full bg-black/50 flex items-center justify-center text-xl font-bold text-white overflow-hidden">
@@ -54,10 +54,10 @@ export function MobileView({ data, initialApp }: { data: PortfolioData; initialA
             </div>
           </div>
           <div className="flex flex-col">
-            <h1 className="text-xl font-bold text-white leading-tight">{data.profile.name}</h1>
-            <p className="text-white/70 text-xs font-medium mt-0.5">{data.profile.role}</p>
+            <h1 className="desk-icon-label text-xl font-bold leading-tight">{data.profile.name}</h1>
+            <p className="desk-icon-label opacity-80 text-xs font-medium mt-0.5">{data.profile.role}</p>
             {data.profile.location && (
-              <div className="flex items-center gap-1 mt-1.5 text-white/50 text-[10px]">
+              <div className="desk-icon-label opacity-70 flex items-center gap-1 mt-1.5 text-[10px]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                 {data.profile.location}
               </div>
@@ -105,16 +105,16 @@ export function MobileView({ data, initialApp }: { data: PortfolioData; initialA
             animate={{ opacity: 1, scale: 1, y: 0, borderRadius: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 50, borderRadius: 40 }}
             transition={{ type: "spring", stiffness: 400, damping: 35 }}
-            className="absolute inset-0 z-50 bg-black/60 backdrop-blur-3xl border border-white/5 flex flex-col"
+            className="absolute inset-0 z-50 bg-[var(--win-bg)] backdrop-blur-3xl border border-[color:var(--win-border)] flex flex-col text-[color:rgb(var(--win-fg))]"
           >
             {/* Safe Area Spacer for Status Bar */}
             <div className="h-[max(env(safe-area-inset-top,44px),44px)] shrink-0 relative z-10 flex items-end justify-center pb-2 px-4">
-               <span className="text-white font-bold text-sm capitalize drop-shadow-md">
+               <span className="font-bold text-sm capitalize">
                  {appRegistry.find((a) => a.id === activeApp)?.label || activeApp}
                </span>
                <button 
                  onClick={() => setActiveApp(null)}
-                 className="absolute right-4 bottom-2 w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:bg-white/20 hover:text-white active:scale-90 transition-all"
+                 className="absolute right-4 bottom-2 w-6 h-6 rounded-full bg-[color:rgb(var(--win-fg)_/_0.1)] flex items-center justify-center text-[color:rgb(var(--win-fg)_/_0.8)] hover:bg-[color:rgb(var(--win-fg)_/_0.2)] active:scale-90 transition-all"
                >
                  <X size={14} />
                </button>
@@ -137,7 +137,7 @@ export function MobileView({ data, initialApp }: { data: PortfolioData; initialA
                 }
               }}
             >
-              <div className="w-[134px] h-[5px] bg-white/70 rounded-full shadow-sm" />
+              <div className="w-[134px] h-[5px] bg-[color:rgb(var(--win-fg)_/_0.6)] rounded-full shadow-sm" />
             </motion.div>
           </motion.div>
         )}
