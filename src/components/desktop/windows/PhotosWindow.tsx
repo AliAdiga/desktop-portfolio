@@ -1,13 +1,51 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import HTMLFlipBook from "react-pageflip";
 import { PortfolioData, Photo } from "@/types/portfolio";
 import { Folder, ChevronLeft, ChevronRight, X, ExternalLink } from "lucide-react";
 import { ICON_FRAME, ICON_FRAME_INTERACTIVE, ICON_STROKE } from "@/lib/iconStyles";
 import { cn } from "@/lib/utils";
 
 type Album = { name: string; url?: string; photos: Photo[] };
+
+/**
+ * One leaf of the album book.
+ *
+ * The paper curl itself belongs to react-pageflip/StPageFlip, which drives the
+ * element this ref lands on — the same library the Demos reel uses, so both
+ * books turn identically. This component owns only what's printed on the page.
+ *
+ * Pages are a fixed shape while these captures are not (they run from square
+ * to 1:2), so the image is contained and centred rather than cropped to fill.
+ * A book has a page size; that is the metaphor, not a bug.
+ */
+const PhotoPage = React.forwardRef<
+  HTMLDivElement,
+  { photo: Photo; n: number; eager: boolean }
+>(({ photo, n, eager }, ref) => (
+    <div ref={ref} className="relative w-full h-full bg-[#0e1013] overflow-hidden">
+      <Image
+        src={photo.url}
+        alt={photo.title ?? photo.caption}
+        fill
+        sizes="70vw"
+        // Every page is mounted from the start, so left lazy they only begin
+        // downloading once turned to — and the page you just turned lands
+        // blank while its image arrives. Loading the neighbours means the next
+        // page is already there whichever way the reader turns.
+        loading={eager ? "eager" : "lazy"}
+        className="object-contain p-3"
+      />
+      <span className="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-black/55 backdrop-blur-md text-[10px] tabular-nums text-white/60">
+        {String(n).padStart(2, "0")}
+      </span>
+      {/* Spine shading, so a turned page reads as paper rather than a slide. */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-black/45 to-transparent" />
+    </div>
+));
+PhotoPage.displayName = "PhotoPage";
 
 /**
  * Group photos into albums, preserving declaration order.
@@ -33,23 +71,36 @@ function toAlbums(photos: Photo[]): Album[] {
 export function PhotosWindow({ data }: { data: PortfolioData }) {
   const albums = useMemo(() => toAlbums(data.photos ?? []), [data.photos]);
   const [openAlbum, setOpenAlbum] = useState<string | null>(null);
-  // An index, not the photo itself — otherwise there is no "next" to go to and
-  // the only way out of a page is back to the grid.
-  const [index, setIndex] = useState<number | null>(null);
+  // `entry` is the page the book opens at and doubles as the open/closed flag;
+  // `index` tracks where the reader has turned to since. Both are indices
+  // rather than the photo itself — otherwise there is no "next" to turn to.
+  const [entry, setEntry] = useState<number | null>(null);
+  const [index, setIndex] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const bookRef = useRef<any>(null);
 
   const album = albums.find((a) => a.name === openAlbum) ?? null;
   const photos = album?.photos ?? [];
-  const current = index === null ? null : (photos[index] ?? null);
+  const current = entry === null ? null : (photos[index] ?? null);
 
-  const close = useCallback(() => setIndex(null), []);
+  const open = useCallback((i: number) => {
+    setEntry(i);
+    setIndex(i);
+  }, []);
+  const close = useCallback(() => setEntry(null), []);
+
+  // Turn through the book rather than setting state directly, so the arrows and
+  // the keyboard produce the same page curl as dragging the corner does.
   const step = useCallback(
-    (delta: number) =>
-      setIndex((i) => (i === null ? i : Math.max(0, Math.min(photos.length - 1, i + delta)))),
-    [photos.length]
+    (delta: number) => {
+      const next = Math.max(0, Math.min(photos.length - 1, index + delta));
+      if (next !== index) bookRef.current?.pageFlip()?.flip(next);
+    },
+    [index, photos.length]
   );
 
   useEffect(() => {
-    if (index === null) return;
+    if (entry === null) return;
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") close();
       if (e.key === "ArrowRight") step(1);
@@ -57,7 +108,7 @@ export function PhotosWindow({ data }: { data: PortfolioData }) {
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [index, close, step]);
+  }, [entry, close, step]);
 
   return (
     <div className="flex flex-col h-[calc(100%+3rem)] bg-[#161616] -m-6 rounded-b-xl overflow-hidden font-sans text-white select-none">
@@ -69,7 +120,7 @@ export function PhotosWindow({ data }: { data: PortfolioData }) {
               type="button"
               onClick={() => {
                 setOpenAlbum(null);
-                setIndex(null);
+                setEntry(null);
               }}
               className="flex items-center gap-0.5 text-white/60 hover:text-white transition-colors -ml-1"
               aria-label="Back to albums"
@@ -148,7 +199,7 @@ export function PhotosWindow({ data }: { data: PortfolioData }) {
               <button
                 key={p.id}
                 type="button"
-                onClick={() => setIndex(i)}
+                onClick={() => open(i)}
                 className="group flex flex-col gap-1.5 text-left outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded-lg"
               >
                 <div className="relative aspect-[16/10] rounded-lg overflow-hidden border border-white/10 group-hover:border-white/30 transition-colors">
@@ -177,8 +228,8 @@ export function PhotosWindow({ data }: { data: PortfolioData }) {
         )}
       </div>
 
-      {/* ---- Reader: one page at a time, turned with the arrows or the keyboard ---- */}
-      {current && index !== null && (
+      {/* ---- Reader: the album as a book you turn page by page ---- */}
+      {album && current && entry !== null && (
         <div
           className="absolute inset-0 z-50 bg-black/90 backdrop-blur-sm flex flex-col p-6 gap-4"
           onClick={close}
@@ -192,16 +243,57 @@ export function PhotosWindow({ data }: { data: PortfolioData }) {
             <X size={18} strokeWidth={ICON_STROKE} />
           </button>
 
-          {/* A flexible box, not a fixed ratio: these pages range from square to
-              1:2, and a fixed frame letterboxes the tall ones into a sliver. */}
-          <div className="relative flex-1 w-full max-w-5xl mx-auto min-h-0">
-            <Image
-              src={current.url}
-              alt={current.title ?? current.caption}
-              fill
-              sizes="90vw"
-              className="object-contain"
-            />
+          <div
+            className="flex-1 w-full max-w-3xl mx-auto min-h-0 flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <HTMLFlipBook
+              // Keyed on the album and the page it was opened at, so the book is
+              // built fresh each time rather than carrying the last album's pages.
+              key={`${album.name}-${entry}`}
+              ref={bookRef}
+              // One page at a time. These are full-page site captures, and a
+              // two-page spread both halves the width they can be read at and
+              // puts two photos on screen against a single caption.
+              //
+              // usePortrait only *permits* single-page mode; StPageFlip still
+              // picks a spread whenever half the container clears minWidth. So
+              // minWidth is deliberately above half of max-w-3xl (768/2 = 384),
+              // which is what actually forces one page. Keep the two in step if
+              // either changes.
+              usePortrait
+              width={520}
+              height={660}
+              size="stretch"
+              minWidth={420}
+              maxWidth={720}
+              minHeight={330}
+              maxHeight={900}
+              startPage={entry}
+              drawShadow
+              flippingTime={700}
+              startZIndex={0}
+              autoSize={false}
+              maxShadowOpacity={0.5}
+              showCover={false}
+              mobileScrollSupport={false}
+              clickEventForward
+              useMouseEvents
+              swipeDistance={30}
+              showPageCorners
+              // Must stay false. When true, StPageFlip gates every flip -- not
+              // just clicks -- through a corner-proximity test that flipPrev
+              // computes differently from flipNext, so turning back silently
+              // stops working.
+              disableFlipByClick={false}
+              className="drop-shadow-2xl"
+              style={{ width: "100%", height: "100%" }}
+              onFlip={(e: { data: number }) => setIndex(e.data)}
+            >
+              {photos.map((p, i) => (
+                <PhotoPage key={p.id} photo={p} n={i + 1} eager={Math.abs(i - index) <= 1} />
+              ))}
+            </HTMLFlipBook>
           </div>
 
           <div className="shrink-0 text-center" onClick={(e) => e.stopPropagation()}>
