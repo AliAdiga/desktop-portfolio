@@ -21,6 +21,9 @@ export const portfolioData: PortfolioData = {
     // visitors see instead of the video.
     wallpaperUrl: "/background/wallpaper-live-poster.jpg",
     wallpaperVideoUrl: "/background/wallpaper-live.mp4",
+    // Light theme's own pair, shown when the menu-bar toggle is switched.
+    wallpaperLightUrl: "/background/wallpaper-light-poster.jpg",
+    wallpaperLightVideoUrl: "/background/wallpaper-light.mp4",
     bootLogo: {
       type: "icon", // for image, user image
       value: "Command" // if image, use value to example : /my-custom-logo.png

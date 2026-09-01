@@ -40,7 +40,7 @@ export function Dock({
     <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 select-none">
       <div
         data-drop-folder={dockId}
-        className="flex items-end gap-3 px-4 py-3 rounded-2xl bg-black/60 backdrop-blur-3xl border border-white/15 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)]"
+        className="flex items-end gap-3 px-4 py-3 rounded-2xl bg-[var(--desk-panel-strong)] backdrop-blur-3xl border border-[color:var(--desk-panel-border)] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.45)]"
       >
         {items.map((item, index) => {
           const app = item.kind === "app" ? appRegistry.find((a) => a.id === item.appId) : undefined;
@@ -64,6 +64,8 @@ export function Dock({
               // Folders sitting in the dock accept drops themselves.
               data-drop-folder={item.kind === "folder" ? item.id : undefined}
               data-dragging={draggingId === item.id || undefined}
+              // Aiming point for tour scripts (src/data/tours.ts).
+              data-tour={item.id}
               drag={CAN_REARRANGE}
               dragSnapToOrigin
               dragMomentum={false}
@@ -100,7 +102,7 @@ export function Dock({
                     animate={{ opacity: 1, y: -45, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.9 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute top-0 pointer-events-none px-3 py-1 text-sm bg-black/60 backdrop-blur-md text-white border border-white/20 rounded-lg whitespace-nowrap shadow-lg"
+                    className="absolute top-0 pointer-events-none px-3 py-1 text-sm bg-[var(--desk-panel-strong)] backdrop-blur-md text-[color:var(--desk-text-strong)] border border-[color:var(--desk-panel-border)] rounded-lg whitespace-nowrap shadow-lg"
                   >
                     {item.name}
                   </motion.div>

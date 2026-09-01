@@ -143,6 +143,10 @@ export interface PortfolioData {
      *  Should be muted/silent and reasonably compressed — it decodes
      *  continuously behind the whole UI. */
     wallpaperVideoUrl?: string;
+    /** Still wallpaper for the light theme. Falls back to `wallpaperUrl`. */
+    wallpaperLightUrl?: string;
+    /** Live wallpaper for the light theme. Omit for a still light desktop. */
+    wallpaperLightVideoUrl?: string;
     bootLogo?: {
       type: "icon" | "image";
       value: string;

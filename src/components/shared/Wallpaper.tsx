@@ -4,14 +4,22 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { portfolioData } from "@/data/portfolio";
+import { useTheme } from "@/lib/theme";
 
 interface WallpaperProps {
   className?: string;
 }
 
 export function Wallpaper({ className }: WallpaperProps) {
-  const wallpaperSrc = portfolioData.theme?.wallpaperUrl || "/background/bg.png";
-  const videoSrc = portfolioData.theme?.wallpaperVideoUrl;
+  const { theme } = useTheme();
+  const t = portfolioData.theme;
+
+  // Each theme brings its own wallpaper. Light falls back to the dark pair if
+  // no light wallpaper is configured, so the desktop is never left bare.
+  const light = theme === "light";
+  const wallpaperSrc =
+    (light ? t?.wallpaperLightUrl : undefined) ?? t?.wallpaperUrl ?? "/background/bg.png";
+  const videoSrc = light ? t?.wallpaperLightVideoUrl : t?.wallpaperVideoUrl;
 
   // Start with motion off so the server and first client render agree (no
   // hydration mismatch), then opt in once we've checked the user's setting.
@@ -38,7 +46,12 @@ export function Wallpaper({ className }: WallpaperProps) {
   }, [allowMotion]);
 
   return (
-    <div className={cn("fixed inset-0 z-[-1] overflow-hidden bg-black", className)}>
+    <div
+      className={cn(
+        "fixed inset-0 z-[-1] overflow-hidden bg-[var(--background)]",
+        className
+      )}
+    >
       {/* Still wallpaper: paints immediately, and is the only layer for
           reduced-motion visitors or if the video fails to load. */}
       <div className="absolute inset-0">
@@ -57,6 +70,11 @@ export function Wallpaper({ className }: WallpaperProps) {
           flash, and there's no way for it to get stranded invisible. */}
       {allowMotion && videoSrc && !failed && (
         <video
+          // Keyed on the source so switching theme mounts a fresh element.
+          // Swapping `src` on a playing <video> leaves the previous frames on
+          // screen until the new file buffers, which shows as the old wallpaper
+          // lingering over the new one for a beat.
+          key={videoSrc}
           ref={videoRef}
           src={videoSrc}
           poster={wallpaperSrc}
@@ -72,8 +90,9 @@ export function Wallpaper({ className }: WallpaperProps) {
         />
       )}
 
-      {/* Subtle overlay */}
-      <div className="absolute inset-0 bg-black/10" />
+      {/* Subtle overlay — dark in dark theme, a light haze in light theme, so
+          the chrome sitting on top keeps its contrast either way. */}
+      <div className="absolute inset-0 bg-[var(--wallpaper-scrim)]" />
     </div>
   );
 }

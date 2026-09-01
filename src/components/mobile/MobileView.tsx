@@ -86,7 +86,10 @@ export function MobileView({ data, initialApp }: { data: PortfolioData; initialA
                   resolveIcon(app.iconName, { size: 28, strokeWidth: ICON_STROKE })
                 )}
               </div>
-              <span className="text-white font-medium text-[11px] drop-shadow-md">
+              {/* Sits directly on the wallpaper, so it carries its own contrast
+                  rather than relying on what's behind it — white with a dark
+                  halo in dark theme, ink with a light one in light theme. */}
+              <span className="desk-icon-label font-medium text-[11px]">
                 {app.label}
               </span>
             </button>

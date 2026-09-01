@@ -11,8 +11,11 @@ import {
   BatteryFull,
   BatteryCharging,
   SlidersHorizontal,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { ICON_STROKE } from "@/lib/iconStyles";
+import { useTheme } from "@/lib/theme";
 
 type BatteryState = { level: number; charging: boolean };
 
@@ -37,6 +40,7 @@ export function MenuBar({
 }) {
   const [time, setTime] = useState<string | null>(null);
   const [battery, setBattery] = useState<BatteryState | null>(null);
+  const { theme, toggle } = useTheme();
 
   // Rendered only after mount: the server has no clock to agree with, so
   // emitting a time during SSR would guarantee a hydration mismatch.
@@ -92,7 +96,7 @@ export function MenuBar({
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 h-7 flex items-center justify-between px-3 z-[60] bg-black/40 backdrop-blur-xl border-b border-white/10 text-white/85 text-[13px] select-none">
+    <div className="fixed top-0 left-0 right-0 h-7 flex items-center justify-between px-3 z-[60] bg-[var(--desk-panel)] backdrop-blur-xl border-b border-[color:var(--desk-panel-border)] text-[color:var(--desk-text)] text-[13px] select-none">
       {/* Left — mark plus the frontmost window, as macOS shows the active app */}
       <div className="flex items-center gap-3.5">
         <Command size={14} strokeWidth={ICON_STROKE} className="opacity-80" />
@@ -109,6 +113,21 @@ export function MenuBar({
           )}
         </span>
         <SlidersHorizontal size={14} strokeWidth={ICON_STROKE} className="opacity-75" />
+        {/* Theme switch. Shows the theme you'd get, not the one you're in —
+            the same way a light switch is labelled by what it does. */}
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+          title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+          className="opacity-75 hover:opacity-100 transition-opacity"
+        >
+          {theme === "dark" ? (
+            <Sun size={14} strokeWidth={ICON_STROKE} />
+          ) : (
+            <Moon size={14} strokeWidth={ICON_STROKE} />
+          )}
+        </button>
         <button
           type="button"
           onClick={onSearchClick}

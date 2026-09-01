@@ -1,0 +1,95 @@
+/**
+ * Desktop theme tokens.
+ *
+ * Deliberately a separate file from globals.css: everything the light/dark
+ * switch touches lives here, so the desktop's surfaces can be restyled without
+ * reading past Tailwind's setup and the base resets.
+ *
+ * The whole switch is one attribute. src/lib/theme.ts stamps
+ * `data-theme="light"` on <html> and every surface below follows, which is why
+ * no component needs to know which theme is showing — DesktopView, Dock and
+ * the mobile grid are all untouched by this feature.
+ *
+ * Dark is the base on bare :root rather than behind a media query, because the
+ * desktop is dark-first by design (see DEFAULT_THEME) — an unknown visitor gets
+ * dark, not whatever their OS is set to. `prefers-color-scheme` is deliberately
+ * NOT consulted: this is an explicit choice the visitor makes in the menu bar,
+ * and honouring the OS as well would mean two sources of truth disagreeing.
+ */
+
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Overrides globals.css, which sets these from `prefers-color-scheme`. The
+     attribute selector outranks that media query, so an explicit choice always
+     beats the OS setting — otherwise a visitor on a light OS picking dark would
+     get a light page background behind a dark desktop. */
+  --background: #000000;
+  --foreground: #ffffff;
+
+  /* Menu bar and dock: translucent panels over the wallpaper. */
+  --desk-panel: rgb(0 0 0 / 0.4);
+  --desk-panel-strong: rgb(0 0 0 / 0.6);
+  --desk-panel-border: rgb(255 255 255 / 0.12);
+  --desk-text: rgb(255 255 255 / 0.85);
+  --desk-text-strong: rgb(255 255 255);
+
+  /* Icon frames — the hairline outline treatment. */
+  --icon-border: rgb(255 255 255 / 0.25);
+  --icon-bg: rgb(255 255 255 / 0.04);
+  --icon-fg: rgb(255 255 255 / 0.9);
+  --icon-border-hover: rgb(255 255 255 / 0.6);
+  --icon-bg-hover: rgb(255 255 255 / 0.1);
+  --icon-fg-hover: rgb(255 255 255);
+  --icon-shadow: none;
+
+  /* Desktop icon labels sit directly on the wallpaper, so they carry their own
+     contrast rather than relying on whatever is behind them. */
+  --icon-label: rgb(255 255 255 / 0.9);
+  --icon-label-shadow: 0 1px 3px rgb(0 0 0 / 0.8);
+
+  /* Wallpaper scrim: lifts the dark chrome off a busy wallpaper. */
+  --wallpaper-scrim: rgb(0 0 0 / 0.1);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --background: #eef1f5;
+  --foreground: #0f172a;
+
+  --desk-panel: rgb(255 255 255 / 0.55);
+  --desk-panel-strong: rgb(255 255 255 / 0.72);
+  --desk-panel-border: rgb(15 23 42 / 0.1);
+  --desk-text: rgb(15 23 42 / 0.85);
+  --desk-text-strong: rgb(15 23 42);
+
+  /* The light theme returns to solid tiles rather than hairline outlines: a
+     white-on-white outline disappears, and the filled tile is the treatment
+     these icons had before the monochrome restyle. */
+  --icon-border: rgb(15 23 42 / 0.08);
+  --icon-bg: rgb(255 255 255 / 0.85);
+  --icon-fg: rgb(15 23 42 / 0.75);
+  --icon-border-hover: rgb(15 23 42 / 0.16);
+  --icon-bg-hover: rgb(255 255 255);
+  --icon-fg-hover: rgb(15 23 42);
+  --icon-shadow: 0 1px 3px rgb(15 23 42 / 0.12), 0 4px 12px rgb(15 23 42 / 0.08);
+
+  --icon-label: rgb(15 23 42 / 0.9);
+  --icon-label-shadow: 0 1px 3px rgb(255 255 255 / 0.9);
+
+  --wallpaper-scrim: rgb(255 255 255 / 0.06);
+}
+
+/* Applied by the icon frames so the tile can carry a shadow in light and none
+   in dark, without either theme needing its own class in the components. */
+.icon-frame-shadow {
+  box-shadow: var(--icon-shadow);
+}
+
+/* Desktop icon captions. */
+.desk-icon-label {
+  color: var(--icon-label);
+  text-shadow: var(--icon-label-shadow);
+}
